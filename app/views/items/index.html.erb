@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>This page is for search item</h1>
+  <div>
+    <%= form_tag(items_path, method: "get") do %>
+    <%= text_field_tag(:search, params[:search], placeholder: "Search items") %>
+    <%= submit_tag("Search") %>
+    <% end %>
+
+    <% @items.each do |item| %>
+      <%= item.name %>
+    <% end %>
+  </div>
+</div>
