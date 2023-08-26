@@ -1,0 +1,11 @@
+<div class="container">
+  <h1><%= @user.name %>'s items</h1>
+
+  <ul>
+    <% @user.items.each do |item| %>
+        <li>Name: <%= item.name %></li>
+        <li>Price: <%= item.price %></li>
+        <br>
+      <% end %>
+  </ul>
+</div>
