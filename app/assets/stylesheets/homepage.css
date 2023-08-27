@@ -61,6 +61,7 @@ body {
   display: block;
   margin: 0 auto;
 }
+
 header {
   text-align: center;
   display: flex;
@@ -88,9 +89,14 @@ header {
 .sold-items {
   width: 100%;
   max-width: 1200px;
-  margin: 2rem auto;
-  float: right;
+  margin: 1rem auto;
   text-align: center;
+}
+
+.section-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .product {
@@ -99,16 +105,21 @@ header {
   margin-bottom: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  max-width: calc(33.33% - 20px);
   box-sizing: border-box;
-  float: left;
   margin-right: 20px;
+  max-width: calc(33.33% - 20px);
 }
 
 .clearfix::after {
   content: "";
   display: table;
   clear: both;
+}
+
+.slider {
+  text-align: center;
+  float: right;
+  width: 80%;
 }
 
 footer {

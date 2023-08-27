@@ -5,10 +5,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
   <link rel="stylesheet" href="/stylesheets/homepage.css">
   <%= stylesheet_link_tag "homepage" %>
+  <!-- yaya's carousel effect for floats-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
 <body>
   <div class="page-container">
-    <!-- Your existing content goes here -->
     <div class="left-image-container">
       <%= image_tag("mySell_logo.png", alt: "Left Image") %>
       <div class="search-bar">
@@ -16,17 +18,17 @@
         <button type="submit">Search</button>
       </div>
     </div>
-<header class="header-container">
-  <div class="logo-container">
-    <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-  </div>
+    <header class="header-container">
+      <div class="logo-container">
+        <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+      </div>
       <div class="login-container">
         <%= link_to "Login", new_user_session_path, class: "login-button" %>
       </div>
     </header>
     <div class="featured-container">
       <section class="featured-products">
-        <div class="featured-content">
+        <div class="featured-content slider">
           <h2>&#128293;Featured Products&#128293;</h2>
           <div class="product">
             <h3>Apple Macbook Pro</h3>
@@ -45,34 +47,60 @@
           </div>
         </div>
       </section>
-
-      <!-- New section: Sold Items -->
-      <section class="sold-items">
-        <div class="sold-content">
-          <h2>&#128176;Recently Sold Items&#128176;</h2>
-          <div class="product">
-            <h3>Sold Product 1</h3>
-            <p>Description of the sold product goes here.</p>
-            <span class="price">$199.99</span>
-          </div>
-          <div class="product">
-            <h4>Sold Product 2</h4>
-            <p>Description of the sold product goes here.</p>
-            <span class="price">$149.99</span>
-          </div>
-          <div class="product">
-            <h5>Sold Product 3</h5>
-            <p>Description of the sold product goes here.</p>
-            <span class="price">$249.99</span>
-          </div>
-          <!-- Repeat for other sold products if needed -->
+    </div>
+    <div class="sold-items">
+      <section class="sold-content slider">
+        <h2>&#128176;Recently Sold Items&#128176;</h2>
+        <div class="product">
+          <h3>Sold Product 1</h3>
+          <p>Description of the sold product goes here.</p>
+          <span class="price">$199.99</span>
         </div>
+        <div class="product">
+          <h4>Sold Product 2</h4>
+          <p>Description of the sold product goes here.</p>
+          <span class="price">$149.99</span>
+        </div>
+        <div class="product">
+          <h5>Sold Product 3</h5>
+          <p>Description of the sold product goes here.</p>
+          <span class="price">$249.99</span>
+        </div>
+        <!-- copy paste if more needs to be added -->
       </section>
     </div>
     <footer>
       <p>&copy; 2023 mySell</p>
     </footer>
   </div>
-  <!-- No JavaScript code for scrolling needed -->
+
+  <!-- javascipt for carousel -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.slider').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+        nextArrow: '<button type="button" class="slick-next">Next</button>',
+        responsive: [
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: 2
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+    });
+  </script>
 </body>
 </html>
