@@ -16,10 +16,10 @@
         <button type="submit">Search</button>
       </div>
     </div>
-    <header class="header-container">
-      <div class="logo-container">
-        <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-      </div>
+<header class="header-container">
+  <div class="logo-container">
+    <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+  </div>
       <div class="login-container">
         <%= link_to "Login", new_user_session_path, class: "login-button" %>
       </div>
@@ -43,7 +43,29 @@
             <p>Description of the product goes here.</p>
             <span class="price">$99.99</span>
           </div>
-          <!-- Repeat for other products if needed -->
+        </div>
+      </section>
+
+      <!-- New section: Sold Items -->
+      <section class="sold-items">
+        <div class="sold-content">
+          <h2>&#128176;Recently Sold Items&#128176;</h2>
+          <div class="product">
+            <h3>Sold Product 1</h3>
+            <p>Description of the sold product goes here.</p>
+            <span class="price">$199.99</span>
+          </div>
+          <div class="product">
+            <h4>Sold Product 2</h4>
+            <p>Description of the sold product goes here.</p>
+            <span class="price">$149.99</span>
+          </div>
+          <div class="product">
+            <h5>Sold Product 3</h5>
+            <p>Description of the sold product goes here.</p>
+            <span class="price">$249.99</span>
+          </div>
+          <!-- Repeat for other sold products if needed -->
         </div>
       </section>
     </div>
@@ -51,5 +73,6 @@
       <p>&copy; 2023 mySell</p>
     </footer>
   </div>
+  <!-- No JavaScript code for scrolling needed -->
 </body>
 </html>
