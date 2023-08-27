@@ -1,0 +1,15 @@
+
+<% @user.items.each do |item| %>
+    <h3><strong>Name: <%= item.name %></strong></h3>
+    <h4>Category: <%= item.category %></h4>
+    <% item.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
+    <h4>Description: <%= item.description %></h4>
+    <h4>Price: <%= item.price %></h4>
+    <%= link_to "Remove this item",
+      item_path(item), method: :delete,
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    %>
+    <hr>
+  <% end %>
