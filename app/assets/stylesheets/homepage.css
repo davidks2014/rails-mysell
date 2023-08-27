@@ -1,0 +1,102 @@
+/* app/assets/stylesheets/home.css */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #272222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  max-width: 800px;
+}
+
+.left-image-container {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translateY(-50%);
+}
+
+.search-bar {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.left-image-container img {
+  max-width: 500px; /* Adjust the width as needed */
+  display: block;
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.login-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.featured-products {
+  text-align: right; /* Align text to the right */
+  margin: 2rem; /* Add margin for spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align items to the right */
+  justify-content: center; /* Center vertically */
+  flex-grow: 1; /* Expand to fill available space */
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  max-width: 300px;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}

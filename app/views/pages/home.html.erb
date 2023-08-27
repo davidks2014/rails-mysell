@@ -1,2 +1,37 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- app/views/pages/home.html.erb -->
+<html>
+<head>
+  <title>mySell</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+  <link rel="stylesheet" href="/stylesheets/homepage.css">
+  <%= stylesheet_link_tag "homepage" %>
+</head>
+<body>
+  <div class="left-image-container">
+    <%= image_tag("mySell_logo.png", alt: "Left Image") %>
+    <div class="search-bar">
+      <input type="text" placeholder="Search">
+      <button type="submit">Search</button>
+    </div>
+  </div>
+  <header class="header-container">
+    <div class="logo-container">
+      <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+    </div>
+    <div class="login-container">
+      <%= link_to "Login", new_user_session_path, class: "login-button" %>
+    </div>
+  </header>
+  <section class="featured-products">
+    <div class="product">
+      <h3>Product Name</h3>
+      <p>Description of the product goes here.</p>
+      <span class="price">$99.99</span>
+    </div>
+    <h2>Featured Products</h2> <!-- Moved below the product div -->
+  </section>
+  <footer>
+    <p>&copy; 2023 mySell</p>
+  </footer>
+</body>
+</html>
