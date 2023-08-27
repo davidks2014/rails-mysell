@@ -5,4 +5,5 @@ class Item < ApplicationRecord
   validates :price, presence: true
   validates :category, presence: true
   validates :name, presence: true
+  scope :random_featured, -> (limit) { where(status: "Available").where(category: CATEGORIES.sample).order("RANDOM()").limit(limit) }
 end

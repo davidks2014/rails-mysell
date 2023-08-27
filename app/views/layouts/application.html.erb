@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RailsMysell</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>RailsMysell</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
+<body>
+  <%= render "shared/navbar" %>
+  <%= render "shared/flashes" %>
+  <header class="header-container">
+    <div class="login-container">
+      <% if user_signed_in? %>
+        <p class="greeting">Hi, <%= current_user.name %></p>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "login-button" %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class: "login-button" %>
+      <% end %>
+    </div>
+  </header>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
-
-  <body>
-    <%= render "shared/navbar" %>
-    <%= yield %>
-    <%= render "shared/flashes" %>
-  </body>
+  <%= yield %>
+</body>
 </html>

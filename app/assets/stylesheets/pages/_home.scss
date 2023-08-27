@@ -1,1 +1,140 @@
-// Specific CSS for your home-page
+// Specific CSS for your home-page - yaya's nightmare
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #272222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+.header-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo-container {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  max-width: 800px;
+}
+
+.left-image-container {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translateY(-50%);
+}
+
+.search-bar {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.left-image-container img {
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.login-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.featured-products,
+.sold-items {
+  width: 100%;
+  max-width: 1200px;
+  margin: 1rem auto;
+  float: right;
+  text-align: center;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  max-width: calc(33.33% - 20px);
+  box-sizing: border-box;
+  float: left;
+  margin-right: 20px;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.slider {
+  text-align: center;
+  float: right;
+  width: 80%;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: rem;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+}
+
+footer {
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ddd;
+}
