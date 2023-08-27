@@ -1,11 +1,17 @@
 <div class="container">
   <h1><%= @user.name %>'s items</h1>
+  <hr>
 
-  <ul>
-    <% @user.items.each do |item| %>
-        <li>Name: <%= item.name %></li>
-        <li>Price: <%= item.price %></li>
-        <br>
-      <% end %>
-  </ul>
+  <% @user.items.each do |item| %>
+    <h3><strong>Name: <%= item.name %></strong></h3>
+    <h3>Price: <%= item.price %></h3>
+    <% item.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
+    <%= link_to "Remove this item",
+      item_path(item), method: :delete,
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    %>
+    <hr>
+  <% end %>
 </div>
