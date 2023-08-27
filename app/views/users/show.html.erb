@@ -2,16 +2,18 @@
   <h1><%= @user.name %>'s items</h1>
   <hr>
 
-  <% @user.items.each do |item| %>
-    <h3><strong>Name: <%= item.name %></strong></h3>
-    <h3>Price: <%= item.price %></h3>
-    <% item.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+   <div class="card-group mt-3">
+    <% @user.items.each do |item| %>
+      <div class="card" style="width: 18rem;">
+        <%= cl_image_tag item.photos.first.key %>
+        <div class="card-body">
+          <h3 class="card-title"><strong><%= item.name %></strong></h3>
+          <h3>Price: <%= item.price %></h3>
+          <p class="card-text"><%= item.description %>Item descriptions.</p>
+          <a href="#" class="btn btn-primary">Offer</a>
+        </div>
+      </div>
     <% end %>
-    <%= link_to "Remove this item",
-      item_path(item), method: :delete,
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %>
-    <hr>
-  <% end %>
+  </div>
+
 </div>
