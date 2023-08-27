@@ -1,0 +1,25 @@
+<div class="container">
+  <h1><%= @user.name %>'s items</h1>
+  <hr>
+
+   <div class="card-group mt-3">
+    <% @user.items.each do |item| %>
+      <div class="card" style="width: 18rem;">
+        <div>
+        <%= cl_image_tag item.photos.first.key, height: 150, width: 100, crop: :fill %>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title"><strong><%= item.name %></strong></h3>
+          <h3>Price: <%= item.price %></h3>
+          <p class="card-text"><%= item.description %>Item descriptions.</p>
+          <a href="#" class="btn btn-primary">Offer</a>
+          <%= link_to "Remove this item",
+            item_path(item), method: :delete,
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
