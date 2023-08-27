@@ -5,5 +5,6 @@ class Item < ApplicationRecord
   validates :price, presence: true
   validates :category, presence: true
   validates :name, presence: true
+  validates :photos, presence: true
   has_many_attached :photos
 end
