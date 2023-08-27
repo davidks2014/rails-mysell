@@ -13,6 +13,10 @@
           <h3>Price: <%= item.price %></h3>
           <p class="card-text"><%= item.description %>Item descriptions.</p>
           <a href="#" class="btn btn-primary">Offer</a>
+          <%= link_to "Remove this item",
+            item_path(item), method: :delete,
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          %>
         </div>
       </div>
     <% end %>
