@@ -11,7 +11,7 @@
         <div class="card-body">
           <h3 class="card-title"><strong><%= item.name %></strong></h3>
           <h3>Price: <%= item.price %></h3>
-          <a href="<%= user_item_path(3, item.id) %>" class="btn btn-primary">See Details</a>
+          <a href="<%= user_item_path(@user, item.id) %>" class="btn btn-primary">See Details</a>
 
           <%= link_to "Remove this item",
             item_path(item), method: :delete,
