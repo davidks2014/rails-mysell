@@ -62,6 +62,26 @@ body {
   display: block;
   margin: 0 auto;
 }
+
+.right-image-container {
+  position: absolute;
+  top: 50%;
+  right: 0; /* Adjust the right position to be at the edge of the screen */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px; /* Add some padding to prevent overlap with floats */
+  width: 300px; /* Set a fixed width for the container */
+}
+
+.right-image-container img {
+  max-width: 150%; /* Make the image responsive within its container */
+  display: block;
+  margin: 0 auto;
+  z-index: 1;
+}
+
 header {
   text-align: center;
   display: flex;
@@ -92,6 +112,7 @@ header {
   margin: 1rem auto;
   float: right;
   text-align: center;
+  z-index: 2;
 }
 
 .product {
