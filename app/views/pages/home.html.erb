@@ -7,17 +7,23 @@
       </div>
     </div>
     <header class="header-container">
-      <div class="logo-container">
-        <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-      </div>
-      <div class="login-container">
-        <%= link_to "Login", new_user_session_path, class: "login-button" %>
-      </div>
-    </header>
+  <div class="logo-container">
+    <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+  </div>
+  <div class="login-container">
+    <% if user_signed_in? %>
+      <p class="greeting">Hi, <%= current_user.name %></p>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "login-button" %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "login-button" %>
+    <% end %>
+  </div>
+</header>
+
     <div class="featured-container">
     <section class="featured-products">
       <div class="featured-content slider">
-      <h2>&#128293;Featured Products&#128293;</h2>
+      <h2>&#128293;Featured Items&#128293;</h2>
       <% @featured_items.each do |item| %>
       <div class="product">
       <h3><%= item.name %></h3>
@@ -46,37 +52,10 @@
           <p>Used, no scratches, battery at 99%</p>
           <span class="price">$1200.39</span>
         </div>
-        <!-- copy paste if more needs to be added -->
+        <!-- copy paste if more needs to be added- yaya -->
       </section>
     </div>
     <footer>
       <p>&copy; 2023 mySell</p>
     </footer>
   </div>
-
-  <!-- javascipt for carousel -->
-  <script>
-    $(document).ready(function(){
-      $('.slider').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        prevArrow: '<button type="button" class="slick-prev">Previous</button>',
-        nextArrow: '<button type="button" class="slick-next">Next</button>',
-        responsive: [
-          {
-            breakpoint: 992,
-            settings: {
-              slidesToShow: 2
-            }
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 1
-            }
-          }
-        ]
-      });
-    });
-  </script>
