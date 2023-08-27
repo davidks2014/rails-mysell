@@ -8,8 +8,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+  position: relative;
 }
-
 .logo-container {
   margin: 2rem 0;
   display: flex;
@@ -76,13 +77,10 @@ header {
 }
 
 .featured-products {
-  text-align: right; /* Align text to the right */
-  margin: 2rem; /* Add margin for spacing */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Align items to the right */
-  justify-content: center; /* Center vertically */
-  flex-grow: 1; /* Expand to fill available space */
+  width: 500px;
+  margin: 50px;
+  position: absolute;
+  right: 0;
 }
 
 .product {
@@ -91,12 +89,17 @@ header {
   margin-bottom: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  max-width: 300px;
+  max-width: 350px;
 }
 
 footer {
-  background-color: #333;
+  background-color: transparent;
   color: white;
   text-align: center;
   padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
 }

@@ -1,4 +1,4 @@
-<!-- app/views/pages/home.html.erb -->
+<!DOCTYPE html>
 <html>
 <head>
   <title>mySell</title>
@@ -7,31 +7,50 @@
   <%= stylesheet_link_tag "homepage" %>
 </head>
 <body>
-  <div class="left-image-container">
-    <%= image_tag("mySell_logo.png", alt: "Left Image") %>
-    <div class="search-bar">
-      <input type="text" placeholder="Search">
-      <button type="submit">Search</button>
+  <div class="page-container">
+    <!-- Your existing content goes here -->
+    <div class="left-image-container">
+      <%= image_tag("mySell_logo.png", alt: "Left Image") %>
+      <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <button type="submit">Search</button>
+      </div>
     </div>
-  </div>
-  <header class="header-container">
-    <div class="logo-container">
-      <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-    </div>
-    <div class="login-container">
-      <%= link_to "Login", new_user_session_path, class: "login-button" %>
-    </div>
-  </header>
+    <header class="header-container">
+      <div class="logo-container">
+        <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+      </div>
+      <div class="login-container">
+        <%= link_to "Login", new_user_session_path, class: "login-button" %>
+      </div>
+    </header>
+    <div class="featured-container">
   <section class="featured-products">
-    <div class="product">
-      <h3>Product Name</h3>
-      <p>Description of the product goes here.</p>
-      <span class="price">$99.99</span>
+    <div class="featured-content">
+      <h2>&#128293;Featured Products&#128293;
+</h2>
+      <div class="product">
+        <h3>Apple Macbook Pro</h3>
+        <p>Description of the product goes here.</p>
+        <span class="price">$99.99</span>
+      </div>
+      <div class="product">
+        <h3>Alpaka Backpack</h3>
+        <p>Description of the product goes here.</p>
+        <span class="price">$99.99</span>
+      </div>
+      <div class="product">
+        <h4>Home Decor</h4>
+        <p>Description of the product goes here.</p>
+        <span class="price">$99.99</span>
+      </div>
+      <!-- Repeat for other products if needed -->
     </div>
-    <h2>Featured Products</h2> <!-- Moved below the product div -->
   </section>
-  <footer>
-    <p>&copy; 2023 mySell</p>
-  </footer>
+</div>
+    <footer>
+      <p>&copy; 2023 mySell</p>
+    </footer>
+  </div>
 </body>
 </html>
