@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>This page is for search item</h1>
+  <div>
+    <%= form_tag(items_path, method: "get") do %>
+    <%= text_field_tag(:search, params[:search], placeholder: "Search items") %>
+    <%= submit_tag("Search") %>
+    <% end %>
+  </div>
+
+  <div class="card-group mt-3">
+    <% @items.each do |item| %>
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><strong><%= item.name %></strong></h5>
+          <p class="card-text"><%= item.description %>Item descriptions.</p>
+          <a href="#" class="btn btn-primary">Offer</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

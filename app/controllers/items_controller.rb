@@ -1,7 +1,12 @@
 class ItemsController < ApplicationController
 
   def index
-    @user = User.find(params[:user_id])
+    if params[:search]
+      @items = Item.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @items = Item.all
+    end
+    # @user = User.find(params[:user_id])
   end
 
   def show
@@ -38,5 +43,4 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:price, :category, :name, :description, :status, photos: [])
   end
-
 end
