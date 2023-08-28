@@ -1,6 +1,6 @@
 <div class="container">
   <h1>New item for <%= @user.name %></h1>
-  <%= simple_form_for [@user, @item] do |f| %>
+  <%= simple_form_for @item do |f| %>
     <%= f.input :name %>
     <%= f.input :category, collection: ["Electronics", "Clothing", "Books", "Home Decor", "Toys"], prompt: "Select a category" %>
     <%= f.input :description %>
