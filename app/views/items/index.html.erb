@@ -1,9 +1,16 @@
 <div class="container">
   <h1>This page is for search item</h1>
   <div>
-    <%= form_tag(items_path, method: "get") do %>
-    <%= text_field_tag(:search, params[:search], placeholder: "Search items") %>
-    <%= submit_tag("Search") %>
+    <%#= form_tag(items_path, method: "get") do %>
+    <%#= text_field_tag(:search, params[:search], placeholder: "Search items") %>
+    <%#= submit_tag("Search") %>
+    <%# end %>
+
+    <%= simple_form_for :search, method: "get", url: items_path do |f| %>
+      <div class="d-flex">
+        <%= f.input :query, label: false, placeholder: "Type Something" %>
+        <%= f.submit "Search" %>
+      </div>
     <% end %>
   </div>
 
