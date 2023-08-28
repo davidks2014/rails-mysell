@@ -1,4 +1,5 @@
 /* Specific CSS for your home-page - yaya's nightmare */
+
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
@@ -21,7 +22,7 @@ body {
 }
 
 .logo-container {
-  margin-top: -3rem; /* Adjust the margin-top value to shift the container higher */
+  margin-top: -2rem; /* Adjust the margin-top value to shift the container higher */
   margin-bottom: 0;
   display: flex;
   align-items: center;
@@ -33,9 +34,9 @@ body {
 
 .left-image-container {
   position: absolute;
-  top: 50%;
-  left: 150px;
-  transform: translateY(-70%);
+  top: 45%;
+  left: 40px;
+  transform: translateY(-50%);
 }
 
 .search-bar {
@@ -77,7 +78,7 @@ body {
 }
 
 .right-image-container img {
-  max-width: 150%;
+  max-width: 100%;
   display: block;
   margin: 0 auto;
   z-index: 1;
@@ -113,17 +114,19 @@ header {
   margin: 1rem auto;
   float: none; /* Change float to none */
   text-align: center;
+  margin-left: 7rem;
 }
 
 .featured-products .product {
   border: 1px solid #ddd;
   padding: 2rem;
-  margin-bottom: 5rem; /* adding some space in between the 2 floats */
+  margin-bottom: 5rem;
   background-color: #85ADE8;
   border-radius: 15px;
   color: white;
   text-decoration: none;
-  height: 130px; /* set a fixed height for the cards */
+  height: 130px;
+  width: 300px; /* Set a fixed width for the featured products cards */
 }
 
 
@@ -153,13 +156,17 @@ header {
   width: 80%;
 }
 
-.product {
-  border: 1px solid #ddd;
-  padding: 1rem; /* padding issue */
-  margin-bottom: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+.sold-items .product {
+  background-color: #E88585;
+  color: #333;
+  height: 170px;
+  width: 300px;
 }
+
+.sold-items .product h3 {
+  color: #333; /* Update the font color of the card headings */
+}
+
 
 .category-links {
   display: flex;
@@ -167,6 +174,7 @@ header {
   align-items: center;
   margin-top: 600px;
   margin-bottom: 20px;
+  margin-right: 0px;
   clear: both;
   position: sticky;
   top: 500px;
@@ -176,10 +184,14 @@ header {
 .category-links a {
   margin: 0 10px;
   padding: 5px;
-  color: white;
+  color: #E8DE85;
   text-decoration: none;
   text-align: right;
-  margin-top: 200px;
+  margin-top: 10px;
+}
+
+.category-links a:hover {
+  color: white;
 }
 
 footer {

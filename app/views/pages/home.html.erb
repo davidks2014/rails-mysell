@@ -1,4 +1,3 @@
-
 <div class="page-container">
   <div class="left-image-container">
     <%= image_tag("mySell_logo.png", alt: "Left Image") %>
@@ -6,9 +5,6 @@
       <input type="text" placeholder="Search">
       <button type="submit">Search</button>
     </div>
-  </div>
-  <div class="right-image-container">
-    <%= image_tag("right_side", alt: "Right Image") %>
   </div>
 
   <header class="header-container">
@@ -29,14 +25,12 @@
     <section class="featured-products">
       <div class="featured-content slider">
         <h2>&#128293;Featured Items&#128293;</h2>
-        <% @featured_items.each do |item| %>
-          <%= link_to item_path(item) do  %>
-            <div class="product">
-              <h3><%= item.name %></h3>
-              <p><%= item.description %></p>
-              <span class="price">$<%= item.price %></span>
-            </div>
-          <% end %>
+        <% @featured_items.first(3).each do |item| %>
+          <a href="/items/<%= item.id %>" class="product">
+            <h3><%= item.name %></h3>
+            <p><%= item.description %></p>
+            <span class="price">$<%= item.price %></span>
+          </a>
         <% end %>
       </div>
     </section>
@@ -64,14 +58,13 @@
     </section>
   </div>
 
-
   <div class="category-links">
     <a href="/electronics">Electronics</a>
     <a href="/clothing">Clothing</a>
     <a href="/toys">Toys</a>
     <a href="/home-decor">Home Decor</a>
     <a href="/books">Books</a>
-    <!-- Add more categories and hyperlinks as needed -->
+    <!-- add more if needed -->
   </div>
 
   <footer>
