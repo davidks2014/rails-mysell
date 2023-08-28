@@ -1,25 +1,28 @@
 class ItemsController < ApplicationController
 
   def index
-    @user = User.find(params[:user_id])
+    if params[:search]
+      @items = Item.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @items = Item.all
+    end
   end
 
   def show
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
     @item = Item.find(params[:id])
+    @user = @item.user
   end
 
   def new
-    # We need @restaurant in our `simple_form_for`
-    @user = User.find(params[:user_id])
+    @user = current_user
     @item = Item.new
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user
     @item = Item.new(item_params)
     @item.user = @user
-
 
     if @item.save
       redirect_to user_path(@user), notice: "Item was successfully created."
@@ -38,5 +41,4 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:price, :category, :name, :description, :status, photos: [])
   end
-
 end

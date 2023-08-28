@@ -1,1 +1,197 @@
-// Specific CSS for your home-page
+/* Specific CSS for your home-page - yaya's nightmare */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #272222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+.header-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo-container {
+  margin-top: -3rem; /* Adjust the margin-top value to shift the container higher */
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  max-width: 800px;
+}
+
+.left-image-container {
+  position: absolute;
+  top: 50%;
+  left: 150px;
+  transform: translateY(-70%);
+}
+
+.search-bar {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.left-image-container img {
+  max-width: 350px;
+  display: block;
+  margin: 0 auto;
+}
+
+.right-image-container {
+  position: absolute;
+  top: 50%;
+  right: 0; /* Adjust the right position to be at the edge of the screen */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 0px;
+  width: 300px;
+}
+
+.right-image-container img {
+  max-width: 150%;
+  display: block;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+header {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.login-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.featured-products,
+.sold-items {
+  width: 100%;
+  max-width: 1200px;
+  margin: 1rem auto;
+  float: none; /* Change float to none */
+  text-align: center;
+}
+
+.featured-products .product {
+  border: 1px solid #ddd;
+  padding: 2rem;
+  margin-bottom: 5rem; /* adding some space in between the 2 floats */
+  background-color: #85ADE8;
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+  height: 130px; /* set a fixed height for the cards */
+}
+
+
+.product {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  max-width: calc(33.33% - 20px);
+  box-sizing: border-box;
+  float: left;
+  margin-right: 20px;
+  color: #B5E2FA;
+  text-decoration: none;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.slider {
+  text-align: center;
+  float: right;
+  width: 80%;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 1rem; /* padding issue */
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+}
+
+.category-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 600px;
+  margin-bottom: 20px;
+  clear: both;
+  position: sticky;
+  top: 500px;
+  z-index: 999;
+}
+
+.category-links a {
+  margin: 0 10px;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  text-align: right;
+  margin-top: 200px;
+}
+
+footer {
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ddd;
+  z-index: 999;
+}
