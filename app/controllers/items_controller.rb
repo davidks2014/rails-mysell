@@ -1,22 +1,22 @@
 class ItemsController < ApplicationController
 
   def index
-    @user = User.find(params[:user_id])
+    @items = Item.all
   end
 
   def show
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
     @item = Item.find(params[:id])
+    @user = @item.user
   end
 
   def new
-    # We need @restaurant in our `simple_form_for`
-    @user = User.find(params[:user_id])
+    @user = current_user
     @item = Item.new
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user
     @item = Item.new(item_params)
     @item.user = @user
 
