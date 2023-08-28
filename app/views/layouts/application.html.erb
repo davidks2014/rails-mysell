@@ -10,9 +10,7 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 <body>
-<% if controller_name != 'pages' || action_name != 'home' %>
-    <%= render "shared/navbar" %>
-    <% end %>
+  <%#= render "shared/navbar" %>
   <%= render "shared/flashes" %>
   <header class="header-container">
     <div class="login-container">

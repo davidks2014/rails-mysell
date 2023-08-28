@@ -1,3 +1,4 @@
+
 <div class="page-container">
   <div class="left-image-container">
     <%= image_tag("mySell_logo.png", alt: "Left Image") %>
@@ -29,11 +30,13 @@
       <div class="featured-content slider">
         <h2>&#128293;Featured Items&#128293;</h2>
         <% @featured_items.each do |item| %>
-          <a href="/items/<%= item.id %>" class="product">
-            <h3><%= item.name %></h3>
-            <p><%= item.description %></p>
-            <span class="price">$<%= item.price %></span>
-          </a>
+          <%= link_to item_path(item) do  %>
+            <div class="product">
+              <h3><%= item.name %></h3>
+              <p><%= item.description %></p>
+              <span class="price">$<%= item.price %></span>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </section>
