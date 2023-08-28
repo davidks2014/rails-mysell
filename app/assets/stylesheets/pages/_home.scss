@@ -158,9 +158,10 @@ header {
 
 .category-links {
   display: flex;
-  justify-content: center; /* Change justify-content to center */
+  justify-content: center;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   clear: both;
 }
 
@@ -183,4 +184,5 @@ footer {
   left: 0;
   right: 0;
   border-top: 1px solid #ddd;
+  z-index: 999; /* Add a high z-index value to ensure the footer is on top of other elements */
 }
