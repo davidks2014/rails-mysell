@@ -1,65 +1,74 @@
-  <div class="page-container">
-    <div class="left-image-container">
-      <%= image_tag("mySell_logo.png", alt: "Left Image") %>
-      <div class="search-bar">
-        <input type="text" placeholder="Search">
-        <button type="submit">Search</button>
-      </div>
+<div class="page-container">
+  <div class="left-image-container">
+    <%= image_tag("mySell_logo.png", alt: "Left Image") %>
+    <div class="search-bar">
+      <input type="text" placeholder="Search">
+      <button type="submit">Search</button>
     </div>
+  </div>
   <div class="right-image-container">
     <%= image_tag("right_side", alt: "Right Image") %>
-    </div>
   </div>
-    <header class="header-container">
-  <div class="logo-container">
-    <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-  </div>
-  <div class="login-container">
-    <% if user_signed_in? %>
-      <p class="greeting">Hi, <%= current_user.name %></p>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "login-button" %>
-    <% else %>
-      <%= link_to "Login", new_user_session_path, class: "login-button" %>
-    <% end %>
-  </div>
-</header>
 
-    <div class="featured-container">
+  <header class="header-container">
+    <div class="logo-container">
+      <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+    </div>
+    <div class="login-container">
+      <% if user_signed_in? %>
+        <p class="greeting">Hi, <%= current_user.name %></p>
+        <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class: "login-button" %>
+      <% end %>
+    </div>
+  </header>
+
+  <div class="featured-container">
     <section class="featured-products">
       <div class="featured-content slider">
-      <h2>&#128293;Featured Items&#128293;</h2>
-      <% @featured_items.each do |item| %>
-      <div class="product">
-      <h3><%= item.name %></h3>
-      <p><%= item.description %></p>
-      <span class="price">$<%= item.price %></span>
-    </div>
-  <% end %>
-</div>
+        <h2>&#128293;Featured Items&#128293;</h2>
+        <% @featured_items.each do |item| %>
+          <div class="product">
+            <h3><%= item.name %></h3>
+            <p><%= item.description %></p>
+            <span class="price">$<%= item.price %></span>
+          </div>
+        <% end %>
+      </div>
     </section>
   </div>
-    <div class="sold-items">
-      <section class="sold-content slider">
-        <h2>&#128176;Recently Sold Items&#128176;</h2>
-        <div class="product">
-          <h3>Yaya's brain space</h3>
-          <p>Heavily used for coding</p>
-          <span class="price">$999999.99</span>
-        </div>
-        <div class="product">
-          <h4>Yaya's soul</h4>
-          <p>drowning in css and html from frontend and backend for homepage</p>
-          <span class="price">$99999.99</span>
-        </div>
-        <div class="product">
-          <h5>iPhone 14 Pro Max Deep Purple 256GB<h5>
-          <p>Used, no scratches, battery at 99%</p>
-          <span class="price">$1200.39</span>
-        </div>
-        <!-- copy paste if more needs to be added- yaya -->
-      </section>
-    </div>
-    <footer>
-      <p>&copy; 2023 mySell</p>
-    </footer>
+
+  <div class="sold-items">
+    <section class="sold-content slider">
+      <h2>&#128176;Recently Sold Items&#128176;</h2>
+      <div class="product">
+        <h3>Yaya's brain space</h3>
+        <p>Heavily used for coding</p>
+        <span class="price">$999999.99</span>
+      </div>
+      <div class="product">
+        <h4>Yaya's soul</h4>
+        <p>drowning in css and html from frontend and backend for homepage</p>
+        <span class="price">$99999.99</span>
+      </div>
+      <div class="product">
+        <h5>iPhone 14 Pro Max Deep Purple 256GB</h5>
+        <p>Used, no scratches, battery at 99%</p>
+        <span class="price">$1200.39</span>
+      </div>
+      <!-- copy paste if need to be more -->
+    </section>
   </div>
+  <h2 class="category-header">Categories</h2>
+  <div class="category-links">
+    <a href="/electronics">Electronics</a>
+    <a href="/clothing">Clothing</a>
+    <a href="/toys">Toys</a>
+    <a href="/home-decor">Home Decor</a>
+    <!-- add more categories to be hyperlinked -->
+  </div>
+  <footer>
+    <p>&copy; 2023 mySell</p>x
+  </footer>
+</div>

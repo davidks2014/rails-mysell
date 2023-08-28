@@ -21,10 +21,12 @@ body {
 }
 
 .logo-container {
-  margin: 2rem 0;
+  margin-top: -3rem; /* Adjust the margin-top value to shift the container higher */
+  margin-bottom: 0;
   display: flex;
   align-items: center;
 }
+
 
 .logo-container img {
   max-width: 800px;
@@ -110,9 +112,8 @@ header {
   width: 100%;
   max-width: 1200px;
   margin: 1rem auto;
-  float: right;
+  float: none; /* Change float to none */
   text-align: center;
-  z-index: 2;
 }
 
 .product {
@@ -145,6 +146,30 @@ header {
   margin-bottom: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
+}
+
+.category-header {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  clear: both;
+}
+
+.category-links {
+  display: flex;
+  justify-content: center; /* Change justify-content to center */
+  align-items: center;
+  margin-top: 20px;
+  clear: both;
+}
+
+.category-links a {
+  margin: 0 10px;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  text-align: right;
 }
 
 footer {
