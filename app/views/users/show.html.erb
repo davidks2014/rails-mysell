@@ -6,7 +6,7 @@
     <% @user.items.each do |item| %>
       <div class="card" style="width: 18rem;">
         <div>
-          <%= cl_image_tag item.photos.first.key, height: 150, width: 100, crop: :fill %>
+          <%# cl_image_tag item.photos.first.key, height: 150, width: 100, crop: :fill %>
         </div>
         <div class="card-body">
           <h3 class="card-title"><strong><%= item.name %></strong></h3>

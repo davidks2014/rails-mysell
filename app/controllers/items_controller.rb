@@ -1,7 +1,11 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.all
+    if params[:search]
+      @items = Item.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @items = Item.all
+    end
   end
 
   def show
@@ -20,7 +24,6 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = @user
 
-
     if @item.save
       redirect_to user_path(@user), notice: "Item was successfully created."
     else
@@ -38,5 +41,4 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:price, :category, :name, :description, :status, photos: [])
   end
-
 end
