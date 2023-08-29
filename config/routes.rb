@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :items do
+    resources :offers
     collection do
       get 'category/:category', to: 'items#category'
     end
@@ -10,14 +11,9 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
 
-  resources :items do
-    resources :offers, only: %i[new create index]
-  end
-
   resources :offers, only: %i[destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :items, only: %i[index destroy]
 end
