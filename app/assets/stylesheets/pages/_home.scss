@@ -1,4 +1,5 @@
 /* Specific CSS for your home-page - yaya's nightmare */
+
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
@@ -12,6 +13,35 @@ body {
   position: relative;
 }
 
+#video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+#video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
 .header-container {
   text-align: center;
   display: flex;
@@ -21,10 +51,11 @@ body {
 }
 
 .logo-container {
-  margin-top: -3rem; /* Adjust the margin-top value to shift the container higher */
+  margin-top: -2rem;
   margin-bottom: 0;
   display: flex;
   align-items: center;
+  max-width: 100%;
 }
 
 .logo-container img {
@@ -33,20 +64,23 @@ body {
 
 .left-image-container {
   position: absolute;
-  top: 50%;
-  left: 150px;
-  transform: translateY(-70%);
+  top: 45%;
+  left: -25px;
+  transform: translateY(-50%);
 }
 
 .search-bar {
   margin-top: 20px;
   text-align: center;
+  width: 100%;
 }
 
 .search-bar input {
   padding: 8px;
   border: none;
   border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .search-bar button {
@@ -56,28 +90,32 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 20%; // Modify the width to make it responsive
+  max-width: 100px;
 }
 
 .left-image-container img {
-  max-width: 350px;
+  max-width: 50%;
   display: block;
   margin: 0 auto;
+  height: auto;
 }
 
 .right-image-container {
   position: absolute;
   top: 50%;
-  right: 0; /* Adjust the right position to be at the edge of the screen */
+  right: 0;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-right: 0px;
-  width: 300px;
+  width: 100%;
 }
 
 .right-image-container img {
-  max-width: 150%;
+  max-width: 100%;
+  height: auto;
   display: block;
   margin: 0 auto;
   z-index: 1;
@@ -111,19 +149,22 @@ header {
   width: 100%;
   max-width: 1200px;
   margin: 1rem auto;
-  float: none; /* Change float to none */
+  float: none;
   text-align: center;
+  margin-left: 7rem;
 }
 
 .featured-products .product {
+  text-transform: capitalize;
   border: 1px solid #ddd;
-  padding: 2rem;
-  margin-bottom: 5rem; /* adding some space in between the 2 floats */
-  background-color: #85ADE8;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background-color: rgba(128, 128, 128, 0.5); /* opacity */
   border-radius: 15px;
   color: white;
   text-decoration: none;
-  height: 130px; /* set a fixed height for the cards */
+  height: 150px;
+  width: 300px; /* change accordingly for the width of the cards */
 }
 
 
@@ -131,7 +172,7 @@ header {
   border: 1px solid #ddd;
   padding: 1rem;
   margin-bottom: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.5); /* opacity */
   border-radius: 8px;
   max-width: calc(33.33% - 20px);
   box-sizing: border-box;
@@ -139,6 +180,10 @@ header {
   margin-right: 20px;
   color: #B5E2FA;
   text-decoration: none;
+}
+
+.featured-items .product .price {
+  font-weight: bold;
 }
 
 .clearfix::after {
@@ -153,33 +198,50 @@ header {
   width: 80%;
 }
 
-.product {
-  border: 1px solid #ddd;
-  padding: 1rem; /* padding issue */
-  margin-bottom: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+.sold-items .product {
+  background-color: rgba(232, 133, 133, 0.5); /* last value to help w the transparency */
+  color: white;
+  height: 200px;
+  width: 300px;
+}
+
+.sold-items .product .price {
+  font-weight: bold;
+}
+
+.sold-items .product::before {
+  content: "\1F389"; /* emojis */
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .category-links {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 600px;
+  margin-top: 0; // Set margin-top to 0
   margin-bottom: 20px;
+  margin-right: 0px;
   clear: both;
   position: sticky;
-  top: 500px;
+  top: 250px; // Adjust the top value to position it under the recently sold items
   z-index: 999;
+  padding-left: 420px;
 }
+
 
 .category-links a {
   margin: 0 10px;
-  padding: 5px;
-  color: white;
+  padding: 20px;
+  color: #E8DE85;
   text-decoration: none;
   text-align: right;
-  margin-top: 200px;
+  margin-top: -10px;
+  margin-right: 30px;
+}
+
+.category-links a:hover {
+  color: white;
 }
 
 footer {
