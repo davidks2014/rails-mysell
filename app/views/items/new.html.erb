@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>List New Items!</h1>
+  <br>
+  <%= simple_form_for @item do |f| %>
+    <%= f.input :name %>
+    <%= f.input :category, collection: ["Electronics", "Clothing", "Books", "Home Decor", "Toys"], prompt: "Select a category" %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= f.submit "Submit item", class: "btn btn-primary" %>
+  <% end %>
+</div>

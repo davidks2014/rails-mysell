@@ -7,10 +7,8 @@
     <%# end %>
 
     <%= simple_form_for :search, method: "get", url: items_path do |f| %>
-      <div class="d-flex">
-        <%= f.input :query, label: false, placeholder: "Type Something" %>
-        <%= f.submit "Search" %>
-      </div>
+      <%= f.input :query, label: false, placeholder: "Type Something" %>
+      <%= f.submit "Search" %>
     <% end %>
   </div>
 
