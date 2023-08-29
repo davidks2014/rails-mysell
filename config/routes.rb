@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :items
+  resources :items do
+    collection do
+      get 'category/:category', to: 'items#category'
+    end
+  end
+
   resources :users, only: %i[show]
 
   resources :items do
