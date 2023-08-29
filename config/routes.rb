@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
 
+  # Add the following route for the video file
+  get '/video/bg_video.mp4', to: redirect('https://www.example.com/videos/bg_video.mp4')
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

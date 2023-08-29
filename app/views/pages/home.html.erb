@@ -1,3 +1,30 @@
+<div id="video-background">
+  <video autoplay muted loop playsinline controls="false">
+    <source src="https://drive.google.com/uc?export=download&id=1EEAuAgCZNrG5giu9WLSJB-FmRLaY75IZ" type="video/mp4">
+  </video>
+</div>
+
+<script>
+  const video = document.getElementById('myVideo');
+  video.controls = false;
+</script>
+
+<div class="left-image-container">
+  <%= image_tag("mySell_logo.png", alt: "Left Image") %>
+  <div class="search-bar">
+    <input type="text" placeholder="Search">
+    <button type="submit">Search</button>
+  </div>
+</div>
+
+  <div class="left-image-container">
+    <%= image_tag("mySell_logo.png", alt: "Left Image") %>
+    <div class="search-bar">
+      <input type="text" placeholder="Search">
+      <button type="submit">Search</button>
+    </div>
+  </div>
+
 <div class="page-container">
   <div class="left-image-container">
     <%= image_tag("mySell_logo.png", alt: "Left Image") %>
@@ -84,6 +111,6 @@
 
 
   <footer>
-    <p>&copy; 2023 mySell</p>
+    <p>&copy; 2023 mySell - the team that is going to bring you, StockPro</p>
   </footer>
 </div>
