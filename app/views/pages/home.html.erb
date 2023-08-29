@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,14 +27,6 @@
     <header class="header-container">
       <div class="logo-container">
         <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-      </div>
-      <div class="login-container">
-        <% if user_signed_in? %>
-          <p class="greeting">Hi, <%= current_user.name %></p>
-          <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
-        <% else %>
-          <%= link_to "Login", new_user_session_path, class: "login-button" %>
-        <% end %>
       </div>
     </header>
 
