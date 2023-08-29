@@ -1,6 +1,7 @@
 class OffersController < ApplicationController
   def index
     @offers = Offer.all
+    authorize @offer
   end
 
   def new
