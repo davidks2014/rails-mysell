@@ -5,11 +5,14 @@ Rails.application.routes.draw do
   resources :items
   resources :users, only: %i[show]
 
-  resources :items
+  resources :items do
+    resources :offers, only: %i[new create index]
+  end
 
+  resources :offers, only: %i[destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :items, only: [:index, :destroy]
+  resources :items, only: %i[index destroy]
 end
