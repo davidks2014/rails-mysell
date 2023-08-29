@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :items do
+    resources :offers
     collection do
       get 'category/:category', to: 'items#category'
     end
