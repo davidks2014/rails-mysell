@@ -33,6 +33,7 @@ class ItemsController < ApplicationController
 
   def category
     @items = Item.where(category: params[:category])
+    raise
   end
 
   def destroy
