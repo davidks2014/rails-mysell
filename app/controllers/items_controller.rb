@@ -12,17 +12,20 @@ class ItemsController < ApplicationController
     #@user = User.find(params[:user_id])
     @item = Item.find(params[:id])
     @user = @item.user
+    authorize @item
   end
 
   def new
     @user = current_user
     @item = Item.new
+    authorize @item
   end
 
   def create
     @user = current_user
     @item = Item.new(item_params)
     @item.user = @user
+    authorize @item
 
     if @item.save
       redirect_to user_path(@user), notice: "Item was successfully created."
@@ -37,6 +40,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    authorize @item
     @item = Item.find(params[:id])
     @item.destroy
     redirect_to user_path(@item.user), notice: "Item was successfully removed.", status: :see_other

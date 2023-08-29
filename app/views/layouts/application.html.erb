@@ -10,18 +10,8 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 <body>
-  <%#= render "shared/navbar" %>
+  <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
-  <header class="header-container">
-    <div class="login-container">
-      <% if user_signed_in? %>
-        <p class="greeting">Hi, <%= current_user.name %></p>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "login-button" %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: "login-button" %>
-      <% end %>
-    </div>
-  </header>
 
   <%= yield %>
 </body>
