@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: %i[show]
+  resources :users, only: %i[index show]
 
   # Add the following route for the video file
   get '/video/bg_video.mp4', to: redirect('https://www.example.com/videos/bg_video.mp4')
