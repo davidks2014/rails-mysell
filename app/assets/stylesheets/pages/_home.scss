@@ -55,6 +55,7 @@ video::-webkit-media-controls-panel {
   margin-bottom: 0;
   display: flex;
   align-items: center;
+  max-width: 100%;
 }
 
 .logo-container img {
@@ -64,19 +65,22 @@ video::-webkit-media-controls-panel {
 .left-image-container {
   position: absolute;
   top: 45%;
-  left: 40px;
+  left: -25px;
   transform: translateY(-50%);
 }
 
 .search-bar {
   margin-top: 20px;
   text-align: center;
+  width: 100%;
 }
 
 .search-bar input {
   padding: 8px;
   border: none;
   border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .search-bar button {
@@ -86,12 +90,15 @@ video::-webkit-media-controls-panel {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 20%; // Modify the width to make it responsive
+  max-width: 100px;
 }
 
 .left-image-container img {
-  max-width: 350px;
+  max-width: 50%;
   display: block;
   margin: 0 auto;
+  height: auto;
 }
 
 .right-image-container {
@@ -103,11 +110,12 @@ video::-webkit-media-controls-panel {
   flex-direction: column;
   align-items: center;
   padding-right: 0px;
-  width: 300px;
+  width: 100%;
 }
 
 .right-image-container img {
   max-width: 100%;
+  height: auto;
   display: block;
   margin: 0 auto;
   z-index: 1;
@@ -211,14 +219,16 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 450px;
+  margin-top: 0; // Set margin-top to 0
   margin-bottom: 20px;
   margin-right: 0px;
   clear: both;
   position: sticky;
-  top: 500px;
+  top: 250px; // Adjust the top value to position it under the recently sold items
   z-index: 999;
+  padding-left: 420px;
 }
+
 
 .category-links a {
   margin: 0 10px;
@@ -226,8 +236,8 @@ header {
   color: #E8DE85;
   text-decoration: none;
   text-align: right;
-  margin-top: 50px;
-  margin-right: 70px;
+  margin-top: -10px;
+  margin-right: 30px;
 }
 
 .category-links a:hover {
