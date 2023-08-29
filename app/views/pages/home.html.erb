@@ -3,8 +3,10 @@
   <div class="left-image-container">
     <%= image_tag("mySell_logo.png", alt: "Left Image") %>
     <div class="search-bar">
-      <input type="text" placeholder="Search">
-      <button type="submit">Search</button>
+      <%= simple_form_for :search, method: "get", url: items_path do |f| %>
+        <%= f.input :query, label: false, placeholder: "Type Something" %>
+        <%= f.submit "Search" %>
+      <% end %>
     </div>
   </div>
   <div class="right-image-container">
