@@ -31,6 +31,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def category
+    @items = Item.where(category: params[:category])
+  end
+
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
