@@ -15,12 +15,14 @@
   <div class="card-group mt-3">
     <% @items.each do |item| %>
       <div class="card" style="width: 18rem;">
+      <%= link_to item_path(item) do %>
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title"><strong><%= item.name %></strong></h5>
           <p class="card-text"><%= item.description %>Item descriptions.</p>
           <a href="#" class="btn btn-primary">Offer</a>
         </div>
+      <% end %>
       </div>
     <% end %>
   </div>
