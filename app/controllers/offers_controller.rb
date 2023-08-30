@@ -1,11 +1,18 @@
 class OffersController < ApplicationController
   def index
-    @offers = Offer.all
+    @item = Item.find(params[:item_id])
+    policy_scope(Offer)
+    if @item.user == current_user
+      @offers = @item.offers
+    else
+      @offers = @item.offers.select{|o| o.user == current_user}
+    end
   end
 
   def new
     @item = Item.find(params[:item_id])
     @offer = Offer.new
+    authorize @offer
   end
 
   def create
@@ -13,11 +20,13 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @offer.item = @item
     @offer.user = current_user
+    authorize @offer
+
 
     if @offer.save
-      redirect_to @item
+      redirect_to item_offers_path(@item)
     else
-      render :new, status: :unprocessable_entity
+      render 'items/show' , status: :unprocessable_entity
     end
   end
 

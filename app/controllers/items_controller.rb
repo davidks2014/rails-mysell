@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
   def index
     # raise
-    @items = Item.all
+    @items = policy_scope(Item).all
     if params[:search]
       @items = Item.where("name LIKE ?", "%#{ params[:search][:query].downcase}%")
     end
@@ -11,18 +11,21 @@ class ItemsController < ApplicationController
   def show
     #@user = User.find(params[:user_id])
     @item = Item.find(params[:id])
-    @user = @item.user
+    @offer = Offer.new
+    authorize @item
   end
 
   def new
     @user = current_user
     @item = Item.new
+    authorize @item
   end
 
   def create
     @user = current_user
     @item = Item.new(item_params)
     @item.user = @user
+    authorize @item
 
     if @item.save
       redirect_to user_path(@user), notice: "Item was successfully created."
@@ -37,6 +40,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
+    authorize @item
     @item.destroy
     redirect_to user_path(@item.user), notice: "Item was successfully removed.", status: :see_other
   end
