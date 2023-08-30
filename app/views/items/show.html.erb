@@ -7,10 +7,17 @@
 <% end %>
 <h4>Description: <%= @item.description %></h4>
 <h4>Price: <%= @item.price %></h4>
-<%#= link_to "Remove this item",
-  item_path(@item), method: :delete,
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+<%= simple_form_for [@item, @offer] do |f| %>
+  <%= f.input :price %>
+  <%= f.submit %>
+<% end %>
+<% if policy(@item).destroy? %>
+  <%= link_to "Remove this item",
+    item_path(@item), method: :delete,
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<% end %>
+
 <%= link_to "Submit Offer", new_item_offer_path(@item) %>
 
 
