@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
     # raise
     @items = Item.all
     if params[:search]
-      @items = Item.where("name LIKE ?", "%#{ params[:search][:query]}%")
+      @items = Item.where("name LIKE ?", "%#{ params[:search][:query].downcase}%")
     end
   end
 
