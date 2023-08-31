@@ -3,5 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @featured_items = Item.all.shuffle.take(4)
+    @user = current_user
   end
 end
