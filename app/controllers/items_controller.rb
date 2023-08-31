@@ -36,6 +36,7 @@ class ItemsController < ApplicationController
 
   def category
     @items = Item.where(category: params[:category])
+    authorize @items
   end
 
   def destroy
