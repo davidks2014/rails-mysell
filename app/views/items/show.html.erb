@@ -9,10 +9,13 @@
 <% end %>
 <h4>Description: <%= @item.description %></h4>
 <h4>Price: <%= @item.price %></h4>
-<%= simple_form_for [@item, @offer] do |f| %>
-  <%= f.input :price %>
-  <%= f.submit %>
+<% if @item.user != current_user %>
+  <%= simple_form_for [@item, @offer] do |f| %>
+    <%= f.input :price %>
+    <%= f.submit %>
+  <% end %>
 <% end %>
+
 <% if policy(@item).destroy? %>
   <%= link_to "Remove this item",
     item_path(@item), method: :delete,
@@ -20,9 +23,6 @@
   %>
 <% end %>
 
-<% if @item.user != current_user %>
-  <%= link_to "Submit Offer", new_item_offer_path(@item) %>
-<% end %>
 
 
 
