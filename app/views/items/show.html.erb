@@ -20,7 +20,9 @@
   %>
 <% end %>
 
-<%= link_to "Submit Offer", new_item_offer_path(@item) %>
+<% if @item.user != current_user %>
+  <%= link_to "Submit Offer", new_item_offer_path(@item) %>
+<% end %>
 
 
 
