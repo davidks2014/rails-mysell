@@ -1,0 +1,9 @@
+<h1> This page will show all offers </h1>
+
+<% @offers.each do |offer| %>
+  <p>Item name : <%= offer.item.name %></p>
+  <p>Seller name : <%= offer.item.user.name %></p>
+  <p>Offer price : <%= offer.price %></p>
+  <p>Offered by : <%= offer.user.name %></p>
+  <p>Status : <%= offer.status %></p>
+<% end %>
