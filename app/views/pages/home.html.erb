@@ -95,7 +95,16 @@
       <!-- add more if you have more categories -->
     </div>
   </div>
-
+  <div>
+    <div class="btn btn-primary" style="background-color: #FFFFFF; color: #000000;">
+      <%= link_to "List Item now", new_item_path %>
+    </div>
+    <% if @user %>
+      <div class="btn btn-primary" style="background-color: #FFFFFF; color: #000000;">
+        <%= link_to "See My Items", user_path(current_user) %>
+      </div>
+    <% end %>
+  </div>
   <footer>
     <p>&copy; 2023 mySell - the team that is going to bring you, StockPro</p>
   </footer>
