@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title"><strong><%= item.name %></strong></h3>
-          <h3>Price: <%= item.price %></h3>
+          <h3>Price: $<%= number_with_precision(item.price, precision: 2) %></h3>
           <%= link_to "See Details", item_path(item), class: "btn btn-primary" %>
           <%= link_to "Seller: #{item.user.name}", user_path(item.user) %>
           <%= link_to "Remove this item",

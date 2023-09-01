@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title"><strong><%= item.name.capitalize %></strong></h3>
-          <h3>Price: <%= item.price %></h3>
+          <span class="price"><%= number_to_currency(item.price, precision: 2) %></span>
           <%= link_to "See Details", item_path(item), class: "btn btn-primary mr-2" %>
           <% if @user == current_user %>
             <%= link_to "Remove this item",

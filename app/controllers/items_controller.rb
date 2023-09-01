@@ -7,6 +7,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def formatted_price
+    sprintf('%.2f', price)
+  end
+
   def show
     # @user = User.find(params[:user_id])
     @item = Item.find(params[:id])

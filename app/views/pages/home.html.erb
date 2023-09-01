@@ -1,3 +1,4 @@
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +37,7 @@
             <a href="/items/<%= item.id %>" class="product">
               <h3><%= item.name %></h3>
               <p><%= item.description %></p>
-              <span class="price">$<%= item.price %></span>
+              <span class="price"><%= number_to_currency(item.price, precision: 2) %></span>
             </a>
           <% end %>
         </div>
@@ -54,7 +55,7 @@
         <div class="product">
           <h4>Toydoll Box Set</h4>
           <p>Bought for my daughter but she likes playing with cars and trucks instead</p>
-          <span class="price">$20</span>
+          <span class="price">$20.00</span>
         </div>
         <div class="product">
           <h5>iPhone 14 Pro Max Deep Purple 256GB</h5>

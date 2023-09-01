@@ -18,7 +18,7 @@
     <% end %>
   <% end %>
   <p class="description" id="item-description">Description: <%= @item.description %></p>
-  <h4>Price: $<%= sprintf('%.2f', @item.price) %></h4> <!-- Add sprintf('%.2f', @item.price) to format the price with 2 decimal points -->
+  <span class="price"><%= number_to_currency(@item.price, precision: 2) %></span><!-- Add sprintf('%.2f', @item.price) to format the price with 2 decimal points -->
   <% if @item.user != current_user %>
     <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
       <%= f.input :price, class: "price-input" %>
