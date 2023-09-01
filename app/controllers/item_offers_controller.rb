@@ -22,7 +22,6 @@ class ItemOffersController < ApplicationController
     @offer.user = current_user
     authorize @offer
 
-
     if @offer.save
       redirect_to item_offers_path(@item)
     else
