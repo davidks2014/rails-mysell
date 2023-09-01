@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+.card-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.card {
+  width: 18rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.btn-primary {
+  background-color: #85ADE8;
+  color: black;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.btn-primary:hover {
+  background-color: darkblue;
+}
+
+.btn-danger {
+  background-color: #E88585;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #E88585;
+}

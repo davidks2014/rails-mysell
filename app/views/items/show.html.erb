@@ -1,4 +1,4 @@
-<h3><strong>Name: <%= @item.name %></strong></h3>
+<h3><strong>Name: <%= @item.name.capitalize %></strong></h3>
 <h4>Category: <%= @item.category %></h4>
 <% @item.photos.each do |photo| %>
   <% if @item.photos.first %>
