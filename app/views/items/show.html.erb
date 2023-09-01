@@ -1,4 +1,6 @@
-<h3><strong>Name: <%= @item.name.capitalize %></strong></h3>
+<%= stylesheet_link_tag 'pages/_indiv_item', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<h3><strong class="item-name"><%= @item.name.capitalize %></strong></h3>
 <h4>Category: <%= @item.category %></h4>
 <% @item.photos.each do |photo| %>
   <% if @item.photos.first %>
@@ -17,6 +19,7 @@
 <% if policy(@item).destroy? %>
   <%= link_to "Remove this item",
     item_path(@item), method: :delete,
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+    class: "remove-item-link"
   %>
 <% end %>
