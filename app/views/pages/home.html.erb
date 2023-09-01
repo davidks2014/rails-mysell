@@ -1,3 +1,4 @@
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,7 @@
           <p>Used, no scratches, battery at 99%</p>
           <span class="price">$1200.39</span>
         </div>
-        <!-- add more if have-->
+        <!-- add more if you have more items -->
       </section>
     </div>
 
@@ -93,14 +94,19 @@
       <!-- add more if you have more categories -->
     </div>
   </div>
-<div>
-  <div class="btn btn-primary custom-button">
-    <%= link_to "List a New Item", new_item_path %>
+
+<div class="btn-group">
+  <div class="btn custom-button custom-button-new-item">
+    <i class="fas fa-plus" style="color: #E88585;"></i>
+    <%= link_to "List a New Item", new_item_path, style: "color: white;" %>
   </div>
   <% if @user %>
-    <div class="btn btn-primary custom-button">
-      <%= link_to "See My Items", user_path(current_user) %>
+    <div class="btn custom-button custom-button-see-items">
+      <i class="fas fa-eye" style="color: #E88585;"></i>
+      <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
     </div>
   <% end %>
 </div>
+
 </body>
+</html>
