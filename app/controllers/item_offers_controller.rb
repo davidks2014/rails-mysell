@@ -41,7 +41,12 @@ class ItemOffersController < ApplicationController
     @offer = Offer.find(params[:id])
     authorize @offer
     if @offer.update(offer_params)
-      redirect_to @item, notice: "Offer was successfully updated."
+      # if params[:commit] == "Accept Offer"
+      #   @offer.update(status: "Offer accepted")
+      #   elsif params[:commit] == "Decline Offer"
+      #   @offer.update(status: "Offer declined")
+      # end
+    redirect_to @item, notice: "Offer was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,7 +55,12 @@ class ItemOffersController < ApplicationController
   private
 
   def offer_params
-    params.require(:offer).permit(:price, :status)
+    params.require(:offer).permit(:price, :status).tap do |whitelisted|
+      if whitelisted[:status] == "Accept offer"
+        whitelisted[:status] = "Offer accepted"
+      else
+        whitelisted[:status] = "Offer declined"
+          end
+end
   end
-
 end

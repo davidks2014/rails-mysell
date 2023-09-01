@@ -14,6 +14,12 @@ class ItemsController < ApplicationController
     @offers = @item.offers
     @offer = Offer.new
     authorize @item
+
+    accepted_offer = @offers.find_by(status: "Offer accepted")
+    if accepted_offer
+      @offers.where.not(id: accepted_offer.id).update_all(status: "Offer closed")
+      accepted_offer.item.update(status: "sold")
+    end
   end
 
   def new

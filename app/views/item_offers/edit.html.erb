@@ -2,6 +2,6 @@
 
 <%= simple_form_for [@item, @offer] do |f| %>
   <%= f.input :price %>
-  <%= f.input :status, collection: ["Offer Approved", "Offer Declined"] %>
+  <%= f.input :status, collection: ["Offer accepted", "Offer declined"] %>
   <%= f.submit "Confirm"%>
 <% end %>

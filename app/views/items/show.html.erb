@@ -25,19 +25,27 @@
 <hr>
 <hr>
 
-
 <% if @item.user == current_user %>
   <h1>Offers you have received for this item</h1>
   <% @offers.each do |offer| %>
-    <p>Offered price : <%= offer.price %></p>
-    <p>Offered by : <%= offer.user.name %></p>
-    <p>Status : <%= offer.status %></p>
+      <p>Offered price: <%= offer.price %></p>
+      <p>Offered by: <%= offer.user.name %></p>
+      <p>Item status: <%= @item.status %></p>
+      <p>Offer id: <%= offer.id %></p>
+      <p>Offer status: <%= offer.status %></p>
 
-    <div class="button-container">
-      <%= link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-primary" %>
-      <%= link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-danger" %>
+        <%# <div class="button-container"> %>
+        <%# link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-primary" %>
+        <%# link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-danger" %>
+
+      <% if @item.status == "available" && offer.status != "Offer declined" %>
+        <%= simple_form_for [@item, offer] do |f| %>
+        <%= f.input :status, collection: ["Accept offer", "Decline offer"], label: false %>
+        <%= f.submit "Submit" , class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+
       <hr>
-    </div>
   <% end %>
 
 <% elsif @offers.any? { |offer| offer.user == current_user }  %>
@@ -45,7 +53,8 @@
     <% @offers.each do |offer| %>
       <% if offer.user == current_user  %>
         <p>Price you offered: <%= offer.price %></p>
-        <p>Status : <%= offer.status %></p>
+        <p>Item status : <%= @item.status %></p>
+        <p>Offer status : <%= offer.status %></p>
       <% end %>
     <% end %>
   <% else %>

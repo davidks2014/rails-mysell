@@ -6,7 +6,7 @@
     <%= f.input :category, collection: ["Electronics", "Clothing", "Books", "Home Decor", "Toys"], prompt: "Select a category" %>
     <%= f.input :description %>
     <%= f.input :price %>
-     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.submit "Submit item", class: "btn btn-primary" %>
   <% end %>
 </div>
