@@ -1,15 +1,14 @@
 class ItemsController < ApplicationController
-
   def index
     # raise
     @items = policy_scope(Item).all
     if params[:search]
-      @items = Item.where("name LIKE ?", "%#{ params[:search][:query].downcase}%")
+      @items = Item.where("name LIKE ?", "%#{params[:search][:query].downcase}%")
     end
   end
 
   def show
-    #@user = User.find(params[:user_id])
+    # @user = User.find(params[:user_id])
     @item = Item.find(params[:id])
     @offer = Offer.new
     authorize @item
@@ -47,6 +46,7 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
     params.require(:item).permit(:price, :category, :name, :description, :status, photos: [])
   end

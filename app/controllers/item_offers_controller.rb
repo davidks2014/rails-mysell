@@ -25,7 +25,7 @@ class ItemOffersController < ApplicationController
     if @offer.save
       redirect_to item_offers_path(@item)
     else
-      render 'items/show' , status: :unprocessable_entity
+      render 'items/show', status: :unprocessable_entity
     end
   end
 
@@ -49,5 +49,4 @@ class ItemOffersController < ApplicationController
   def offer_params
     params.require(:offer).permit(:price, :status)
   end
-
 end
