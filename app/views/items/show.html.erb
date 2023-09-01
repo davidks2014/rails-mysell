@@ -20,3 +20,13 @@
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
   %>
 <% end %>
+<hr>
+<hr>
+
+<h1>Offers already made for this item</h1>
+<% @offers.each do |offer| %>
+  <p>Offer price : <%= offer.price %></p>
+  <p>Offered by : <%= offer.user.name %></p>
+  <p>Status : <%= offer.status %></p>
+  <hr>
+<% end %>

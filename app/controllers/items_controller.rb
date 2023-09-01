@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
   def show
     #@user = User.find(params[:user_id])
     @item = Item.find(params[:id])
+    @offers = @item.offers
     @offer = Offer.new
     authorize @item
   end
