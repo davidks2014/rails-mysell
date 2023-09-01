@@ -94,11 +94,11 @@
     </div>
   </div>
   <div>
-    <div class="btn btn-primary" style="background-color: #FFFFFF; color: #000000;">
+    <div class="btn btn-primary" style="background-color: transparent; color: #000000;">
       <%= link_to "List Item now", new_item_path %>
     </div>
     <% if @user %>
-      <div class="btn btn-primary" style="background-color: #FFFFFF; color: #000000;">
+      <div class="btn btn-primary" style="background-color: transparent; color: #000000;">
         <%= link_to "See My Items", user_path(current_user) %>
       </div>
     <% end %>
@@ -108,4 +108,3 @@
   </footer>
   <hr class="footer-line">
 </body>
-</html>
