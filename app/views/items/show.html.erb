@@ -1,112 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div id="video-background">
-    <video autoplay muted loop playsinline controls="false">
-      <source src="https://drive.google.com/uc?export=download&id=1EEAuAgCZNrG5giu9WLSJB-FmRLaY75IZ" type="video/mp4">
-    </video>
+<%= stylesheet_link_tag 'pages/_indiv_item_user', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<header class="header-container">
+  <div class="logo-container">
+    <%= image_tag("mySell_vertical.png", alt: "mySell", id: "logo-image") %>
   </div>
+</header>
 
-  <script>
-    const video = document.getElementById('myVideo');
-    video.controls = false;
-  </script>
+<div class="item-name-wrapper">
+  <h3><strong class="item-name" id="item-name"><%= @item.name.capitalize %></strong></h3>
+</div>
 
-  <div class="page-container">
-    <div class="left-image-container">
-      <%= image_tag("mySell_logo.png", alt: "Left Image") %>
-      <div class="search-bar">
-        <%= simple_form_for :search, method: "get", url: items_path do |f| %>
-          <%= f.input :query, label: false, placeholder: "What are you looking for?" %>
-          <%= f.submit "Search" %>
-        <% end %>
-      </div>
-    </div>
-
-    <header class="header-container">
-      <div class="logo-container">
-        <%= image_tag("mySell_vertical.png", alt: "mySell") %>
-      </div>
-    </header>
-
-    <div class="featured-container">
-      <section class="featured-products">
-        <div class="featured-content slider">
-          <h2>&#128293;Featured Items&#128293;</h2>
-          <% @featured_items.first(3).each do |item| %>
-            <a href="/items/<%= item.id %>" class="product">
-              <h3><%= item.name %></h3>
-              <p><%= item.description %></p>
-              <span class="price">$<%= item.price %></span>
-            </a>
-          <% end %>
-        </div>
-      </section>
-    </div>
-
-    <div class="sold-items">
-      <section class="sold-content slider">
-        <h2>&#128176;Recently Sold Items&#128176;</h2>
-        <div class="product">
-          <h3>Yaya's brain space</h3>
-          <p>Heavily used for coding</p>
-          <span class="price">$999999.99</span>
-        </div>
-        <div class="product">
-          <h4>Toydoll Box Set</h4>
-          <p>Bought for my daughter but she likes playing with cars and trucks instead</p>
-          <span class="price">$20</span>
-        </div>
-        <div class="product">
-          <h5>iPhone 14 Pro Max Deep Purple 256GB</h5>
-          <p>Used, no scratches, battery at 99%</p>
-          <span class="price">$1200.39</span>
-        </div>
-        <!-- add more if you have more items -->
-      </section>
-    </div>
-
-    <div class="category-links">
-      <a href="items/category/Electronics">
-        <i class="fas fa-mobile-alt"></i>
-        Electronics
-      </a>
-      <a href="items/category/Clothing">
-        <i class="fas fa-tshirt"></i>
-        Clothing
-      </a>
-      <a href="items/category/Toys">
-        <i class="fas fa-dice"></i>
-        Toys
-      </a>
-      <a href="items/category/Home Decor">
-        <i class="fas fa-couch"></i>
-        Home Decor
-      </a>
-      <a href="items/category/Books">
-        <i class="fas fa-book"></i>
-        Books
-      </a>
-      <!-- add more if you have more categories -->
-    </div>
-  </div>
-
-  <div class="btn-group">
-    <div class="btn custom-button custom-button-new-item">
-      <i class="fas fa-plus"></i>
-      <%= link_to "List a New Item", new_item_path %>
-    </div>
-    <% if @user %>
-      <div class="btn custom-button custom-button-see-items">
-        <i class="fas fa-eye"></i>
-        <%= link_to "See My Items", user_path(current_user) %>
-      </div>
+<div class="item-info">
+  <p class="category" id="item-category">Category: <%= @item.category %></p>
+  <% @item.photos.each do |photo| %>
+    <% if @item.photos.first %>
+      <%= cl_image_tag @item.photos.first.key, height: 300, width: 400, crop: :fill, class: "item-photo" %>
     <% end %>
-  </div>
-</body>
-</html>
+  <% end %>
+  <p class="description" id="item-description">Description: <%= @item.description %></p>
+  <h4>Price: $<%= sprintf('%.2f', @item.price) %></h4> <!-- Add sprintf('%.2f', @item.price) to format the price with 2 decimal points -->
+  <% if @item.user != current_user %>
+    <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
+      <%= f.input :price, class: "price-input" %>
+      <%= f.submit class: "submit-button" %>
+    <% end %>
+  <% end %>
+
+  <% if policy(@item).destroy? %>
+    <%= link_to "Remove this item",
+      item_path(@item), method: :delete,
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+      class: "remove-item-link"
+    %>
+  <% end %>
+</div>
