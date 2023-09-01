@@ -13,6 +13,22 @@ body {
   position: relative;
 }
 
+.icon-wrapper { /*for the home button on top left*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.icon-wrapper i {
+  font-size: 40px; /* Change the size as needed */
+}
+
+#custom-icon {
+  color: white;
+}
+
 #video-background {
   position: fixed;
   top: 0;
