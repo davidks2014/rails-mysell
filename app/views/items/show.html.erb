@@ -25,18 +25,19 @@
 <hr>
 <hr>
 
-<h1>Offers already made for this item</h1>
+<h1>Offers you have made for this item</h1>
+
+
 <% @offers.each do |offer| %>
+  <% if offer.status == "pending" && offer.user == current_user || @item.user = current_user %> <%# only show the offers to either the buyer or the seller. Offers by others cannot be seen by the current user unless he is the seller %>
+    <p>Offer price : <%= offer.price %></p>
+    <p>Offered by : <%= offer.user.name %></p>
+    <p>Status : <%= offer.status %></p>
 
-  <p>Offer price : <%= offer.price %></p>
-  <p>Offered by : <%= offer.user.name %></p>
-  <p>Status : <%= offer.status %></p>
-
-  <% if offer.status == "pending" %>
-  <div class="button-container">
-    <%= link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch %>
-    <%= link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch %>
-  </div>
+    <div class="button-container">
+      <%= link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-primary" %>
+      <%= link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-danger" %>
+    </div>
 
 <% end %>
 
