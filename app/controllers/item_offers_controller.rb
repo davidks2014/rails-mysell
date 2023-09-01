@@ -33,11 +33,13 @@ class ItemOffersController < ApplicationController
   def edit
     @item = Item.find(params[:item_id])
     @offer = Offer.find(params[:id])
+    authorize @offer
   end
 
   def update
     @item = Item.find(params[:item_id])
     @offer = Offer.find(params[:id])
+    authorize @offer
     if @offer.update(offer_params)
       redirect_to @item, notice: "Offer was successfully updated."
     else

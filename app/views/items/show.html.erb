@@ -27,8 +27,19 @@
 
 <h1>Offers already made for this item</h1>
 <% @offers.each do |offer| %>
+
   <p>Offer price : <%= offer.price %></p>
   <p>Offered by : <%= offer.user.name %></p>
   <p>Status : <%= offer.status %></p>
+
+  <% if offer.status == "pending" %>
+  <div class="button-container">
+    <%= link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch %>
+    <%= link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch %>
+  </div>
+
+<% end %>
+
+
   <hr>
 <% end %>
