@@ -3,19 +3,15 @@
 }
 
 .item-name {
-  border: 2px solid #ffffff; /* Border width */
-  padding: 10px; /* Add padding to the item name */
-  display: flex; /* Use flexbox for centering */
-  justify-content: center; /* Center the text horizontally */
-  align-items: center; /* Center the text vertically */
-  /* Additional styles for the item name */
+  border: 2px solid #ffffff;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-
 
 .item-info {
   border: 2px solid white;
   padding: 10px;
   margin-top: 30px;
-  /* Additional styles for the item container */
 }
