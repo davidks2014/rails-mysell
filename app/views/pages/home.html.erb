@@ -20,7 +20,7 @@
       <%= image_tag("mySell_logo.png", alt: "Left Image") %>
       <div class="search-bar">
         <%= simple_form_for :search, method: "get", url: items_path do |f| %>
-          <%= f.input :query, label: false, placeholder: "Type Something" %>
+          <%= f.input :query, label: false, placeholder: "What are you looking for?" %>
           <%= f.submit "Search" %>
         <% end %>
       </div>
@@ -103,8 +103,4 @@
       </div>
     <% end %>
   </div>
-  <footer>
-    <p>&copy; 2023 mySell - the team that is going to bring you, StockPro</p>
-  </footer>
-  <hr class="footer-line">
 </body>
