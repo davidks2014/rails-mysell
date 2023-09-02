@@ -1,13 +1,13 @@
 class OffersController < ApplicationController
-  def index
-    @item = Item.find(params[:item_id])
-    @offers = policy_scope(Offer)
-    # if @item.user == current_user
-    #   @offers = @item.offers
-    # else
-    #   @offers = @item.offers.select{|o| o.user == current_user}
-    # end
-  end
+  # def index
+  #   @item = Item.find(params[:item_id])
+  #   @offers = policy_scope(Offer)
+  #   # if @item.user == current_user
+  #   #   @offers = @item.offers
+  #   # else
+  #   #   @offers = @item.offers.select{|o| o.user == current_user}
+  #   # end
+  # end
 
   def new
     @item = Item.find(params[:item_id])
