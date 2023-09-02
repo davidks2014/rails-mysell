@@ -1,9 +1,27 @@
-<h1>All Pending Offers</h1>
+<br>
+<h1>All Pending Offers </h1> <br>
+    <table border="1">
+        <tr>
+            <th>Item Name</th>
+            <th>Seller Name</th>
+            <th>List Price</th>
+            <th>Offer Price</th>
+            <th>Offered By</th>
+            <th>Status</th>
+        </tr>
+        <div class="grid-container">
+            <% @offers.each do |offer| %>
+                <tr>
+                    <td><%= offer.item.name %></td>
+                    <td><%= offer.item.user.name %></td>
+                    <td><%= offer.item.price %></td>
+                    <td><%= offer.price %></td>
+                    <td><%= offer.user.name %></td>
+                    <td><%= offer.status %></td>
+                </tr>
+            <% end %>
+        </div>
+    </table>
 
-<% @offers.each do |offer| %>
-  <p>Item name : <%= offer.item.name %></p>
-  <p>Seller name : <%= offer.item.user.name %></p>
-  <p>Offer price : <%= offer.price %></p>
-  <p>Offered by : <%= offer.user.name %></p>
-  <p>Status : <%= offer.status %></p>
-<% end %>
+    <br>
+    <%= link_to "Back to my items", user_path(current_user), style: "color: white;" %>

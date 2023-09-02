@@ -273,6 +273,12 @@ header {
   color: white;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
 footer {
   background-color: transparent;
   color: white;
