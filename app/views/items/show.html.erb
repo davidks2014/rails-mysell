@@ -1,8 +1,8 @@
 <h3><strong>Name: <%= @item.name %></strong></h3>
 <h4>Category: <%= @item.category %></h4>
-<% @item.photos.each do |photo| %>
-  <% if @item.photos.first %>
-    <%= cl_image_tag @item.photos.first.key, height: 300, width: 400, crop: :fill %>
+<% if @item.photos.first %>
+  <% @item.photos.each do |photo| %>
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
   <% end %>
 <% end %>
 <h4>Description: <%= @item.description %></h4>
