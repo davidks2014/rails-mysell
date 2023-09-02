@@ -26,6 +26,6 @@ class PagesController < ApplicationController
     @offer = Offer.find(params[:offer_id])
     # Add logic to decline the offer
     @offer.update(status: 'Offer declined')
-    redirect_to user_offers_path, notice: "Offer declined successfully"
+    redirect_to offers_path, notice: "Offer declined successfully"
   end
 end
