@@ -2,8 +2,9 @@ class ItemsController < ApplicationController
   def index
     # raise
     @items = policy_scope(Item).all
-    if params[:search]
-      @items = Item.where("name LIKE ?", "%#{params[:search][:query].downcase}%")
+    if params[:search].present?
+      query = params[:search][:query].downcase
+      @items = Item.where("LOWER(name) LIKE ?", "%#{query}%")
     end
   end
 
