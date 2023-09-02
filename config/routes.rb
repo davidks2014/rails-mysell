@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :items do
-    resources :offers
+    resources :offers, except: %i[update]
+    patch "offers/:id", to: "offers#update", as: :edit_offer
     collection do
       get 'category/:category', to: 'items#category'
     end

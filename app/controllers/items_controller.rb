@@ -12,7 +12,8 @@ class ItemsController < ApplicationController
     #@user = User.find(params[:user_id])
     @item = Item.find(params[:id])
     @offers = @item.offers
-    @offer = Offer.new
+
+    @offer = @offers.find { |offer| offer.user == current_user }
     authorize @item
 
     accepted_offer = @offers.find_by(status: "Offer accepted")
@@ -30,6 +31,7 @@ class ItemsController < ApplicationController
 
   def create
     @user = current_user
+
     @item = Item.new(item_params)
     @item.user = @user
     authorize @item
@@ -45,6 +47,8 @@ class ItemsController < ApplicationController
     @items = Item.where(category: params[:category])
     authorize @items
   end
+
+
 
   def destroy
     @item = Item.find(params[:id])

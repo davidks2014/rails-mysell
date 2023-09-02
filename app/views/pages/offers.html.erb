@@ -18,7 +18,7 @@
     <p>Offered by : <%= offer.user.name %></p>
     <p>Status : <%= offer.status %></p>
       <% if @user == offer.item.user && offer.status == "pending" %>
-        <%= link_to "Approve", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
         <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
       <% end %>
     <hr>

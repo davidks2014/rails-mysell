@@ -41,12 +41,7 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
     authorize @offer
     if @offer.update(offer_params)
-      # if params[:commit] == "Accept Offer"
-      #   @offer.update(status: "Offer accepted")
-      #   elsif params[:commit] == "Decline Offer"
-      #   @offer.update(status: "Offer declined")
-      # end
-    redirect_to @item, notice: "Offer was successfully updated."
+      redirect_to @item, notice: "Offer was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

@@ -9,10 +9,16 @@
 <h4>Price: <%= @item.price %></h4>
 <h4>Seller: <%= @item.user.name %></h4>
 <hr>
-<% if @item.user != current_user %>
+
+<% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
   <%= simple_form_for [@item, @offer] do |f| %>
     <%= f.input :price %>
-    <%= f.submit %>
+    <%= f.submit "Edit Offer"%>
+  <% end %>
+<% elsif @item.user != current_user %>
+  <%= simple_form_for [@item, Offer.new] do |f| %>
+    <%= f.input :price %>
+    <%= f.submit "New Offer"%>
   <% end %>
 <% end %>
 
@@ -39,10 +45,8 @@
         <%# link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-danger" %>
 
       <% if @item.status == "available" && offer.status != "Offer declined" %>
-        <%= simple_form_for [@item, offer] do |f| %>
-        <%= f.input :status, collection: ["Accept offer", "Decline offer"], label: false %>
-        <%= f.submit "Submit" , class: "btn btn-primary" %>
-        <% end %>
+        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+        <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
       <% end %>
 
       <hr>
