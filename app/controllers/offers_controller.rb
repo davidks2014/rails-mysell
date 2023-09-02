@@ -1,4 +1,4 @@
-class ItemOffersController < ApplicationController
+class OffersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @offers = policy_scope(Offer)
@@ -24,7 +24,7 @@ class ItemOffersController < ApplicationController
 
 
     if @offer.save
-      redirect_to item_offers_path(@item)
+      redirect_to item_path(@item)
     else
       render 'items/show' , status: :unprocessable_entity
     end
@@ -33,11 +33,13 @@ class ItemOffersController < ApplicationController
   def edit
     @item = Item.find(params[:item_id])
     @offer = Offer.find(params[:id])
+    authorize @offer
   end
 
   def update
     @item = Item.find(params[:item_id])
     @offer = Offer.find(params[:id])
+    authorize @offer
     if @offer.update(offer_params)
       redirect_to @item, notice: "Offer was successfully updated."
     else
@@ -50,5 +52,4 @@ class ItemOffersController < ApplicationController
   def offer_params
     params.require(:offer).permit(:price, :status)
   end
-
 end
