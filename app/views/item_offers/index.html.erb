@@ -25,3 +25,11 @@
 
     <br>
     <%= link_to "Back to my items", user_path(current_user), style: "color: white;" %>
+<% @offers.each do |offer| %>
+  <p>Item name : <%= offer.item.name %></p>
+  <p>Seller name : <%= offer.item.user.name %></p>
+  <p>Offer price : <%= offer.price %></p>
+  <p>Offered by : <%= offer.user.name %></p>
+  <p>Status : <%= offer.status %></p>
+  <hr>
+<% end %>
