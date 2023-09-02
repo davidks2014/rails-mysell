@@ -1,4 +1,4 @@
-class ItemOffersController < ApplicationController
+class OffersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @offers = policy_scope(Offer)
@@ -24,7 +24,7 @@ class ItemOffersController < ApplicationController
 
 
     if @offer.save
-      redirect_to item_offers_path(@item)
+      redirect_to item_path(@item)
     else
       render 'items/show' , status: :unprocessable_entity
     end
@@ -55,12 +55,6 @@ class ItemOffersController < ApplicationController
   private
 
   def offer_params
-    params.require(:offer).permit(:price, :status).tap do |whitelisted|
-      if whitelisted[:status] == "Accept offer"
-        whitelisted[:status] = "Offer accepted"
-      else
-        whitelisted[:status] = "Offer declined"
-          end
-end
+    params.require(:offer).permit(:price, :status)
   end
 end

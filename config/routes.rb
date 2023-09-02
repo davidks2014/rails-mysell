@@ -3,14 +3,18 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :items do
-    resources :offers, controller: "item_offers"
+    resources :offers
     collection do
       get 'category/:category', to: 'items#category'
     end
   end
 
-  resources :users, only: %i[index show] do
-    resources :offers, only: %i[index], controller: "user_offers"
+  resources :users, only: %i[index show]
+
+  get 'offers', to: 'pages#offers'
+  resources :offers, only: %i[index], controller: "user_offers" do
+    post 'approve', to: 'pages#approve'
+    post 'decline', to: 'pages#decline'
   end
 
 
