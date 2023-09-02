@@ -95,8 +95,9 @@
         <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
       </div>
 
-       <div class="btn btn-primary" style="background-color: #FFFFFF; color: #000000;">
-        <%= link_to "See All Offers", offers_path(current_user) %>
+       <div class="btn custom-button custom-button-see-offers">
+       <i class="fa-solid fa-bolt" style="color: #E88585;"></i>
+        <%= link_to "See All Offers", offers_path(current_user), style: "color: white;" %>
       </div>
     <% end %>
   </div>
