@@ -1,3 +1,21 @@
+
+<%= stylesheet_link_tag 'pages/_indiv_item_user', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<header class="header-container">
+  <div class="logo-container">
+    <%= image_tag("mySell_vertical.png", alt: "mySell", id: "logo-image") %>
+  </div>
+</header>
+
+<div class="item-name-wrapper">
+  <h3><strong class="item-name" id="item-name"><%= @item.name.capitalize %></strong></h3>
+</div>
+
+<div class="item-info">
+  <p class="category" id="item-category">Category: <%= @item.category %></p>
+
+
+=======
 <h3><strong>Name: <%= @item.name %></strong></h3>
 <h4>Category: <%= @item.category %></h4>
 <% if @item.photos.first %>
@@ -11,12 +29,12 @@
 <hr>
 
 <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
-  <%= simple_form_for [@item, @offer] do |f| %>
+  <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
     <%= f.input :price %>
     <%= f.submit "Edit Offer"%>
   <% end %>
 <% elsif @item.user != current_user %>
-  <%= simple_form_for [@item, Offer.new] do |f| %>
+  <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
     <%= f.input :price %>
     <%= f.submit "New Offer"%>
   <% end %>
@@ -64,3 +82,6 @@
   <% else %>
     <h1>You have not made any offer for this item</h1>
 <% end %>
+
+<br>
+<%= link_to "Back to my items", user_path(current_user), style: "color: white;" %>

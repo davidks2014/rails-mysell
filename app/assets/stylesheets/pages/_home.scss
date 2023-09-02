@@ -13,6 +13,22 @@ body {
   position: relative;
 }
 
+.icon-wrapper { /*for the home button on top left*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.icon-wrapper i {
+  font-size: 25px; /* Change the size as needed */
+}
+
+#custom-icon {
+  color: white;
+}
+
 #video-background {
   position: fixed;
   top: 0;
@@ -47,7 +63,7 @@ video::-webkit-media-controls-panel {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0rem;
 }
 
 .logo-container {
@@ -71,7 +87,9 @@ video::-webkit-media-controls-panel {
 
 .search-bar {
   margin-top: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -80,7 +98,12 @@ video::-webkit-media-controls-panel {
   border: none;
   border-radius: 5px;
   width: 100%;
-  max-width: 400px;
+  background-color: rgba(246, 245, 167, 0.8);
+}
+
+.search-bar input[type="text"] {
+  width: 300px; /* Adjust the width to your desired value */
+  background-color: #E8DE85;
 }
 
 .search-bar button {
@@ -90,8 +113,14 @@ video::-webkit-media-controls-panel {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 20%; // Modify the width to make it responsive
+  width: auto; /* Adjust the width as needed */
   max-width: 100px;
+}
+
+.search-bar input[type="submit"] {
+  background-color: #333; /* Change the background color to your desired color */
+  color: white; /* Change the text color to ensure readability */
+  background-color: rgba(128, 128, 128, 0.8);
 }
 
 .left-image-container img {
@@ -237,19 +266,25 @@ header {
   text-decoration: none;
   text-align: right;
   margin-top: -10px;
-  margin-right: 30px;
+  margin-right: 25px;
 }
 
 .category-links a:hover {
   color: white;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
 footer {
+  margin-top: auto;
   background-color: transparent;
   color: white;
   text-align: center;
   padding: 1rem;
-  position: fixed;
   bottom: 0;
   width: 100%;
   left: 0;

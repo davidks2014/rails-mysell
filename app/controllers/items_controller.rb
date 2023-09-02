@@ -1,15 +1,18 @@
 class ItemsController < ApplicationController
-
   def index
     # raise
     @items = policy_scope(Item).all
     if params[:search]
-      @items = Item.where("name LIKE ?", "%#{ params[:search][:query].downcase}%")
+      @items = Item.where("name LIKE ?", "%#{params[:search][:query].downcase}%")
     end
   end
 
+  def formatted_price
+    sprintf('%.2f', price)
+  end
+
   def show
-    #@user = User.find(params[:user_id])
+    # @user = User.find(params[:user_id])
     @item = Item.find(params[:id])
     @offers = @item.offers
 
@@ -58,6 +61,7 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
     params.require(:item).permit(:price, :category, :name, :description, :status, photos: [])
   end

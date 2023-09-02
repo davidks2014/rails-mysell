@@ -22,11 +22,10 @@ class OffersController < ApplicationController
     @offer.user = current_user
     authorize @offer
 
-
     if @offer.save
       redirect_to item_path(@item)
     else
-      render 'items/show' , status: :unprocessable_entity
+      render 'items/show', status: :unprocessable_entity
     end
   end
 

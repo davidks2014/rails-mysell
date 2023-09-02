@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>RailsMysell</title>
+  <title>mySell</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -16,7 +17,7 @@
   <header class="header-container">
     <div class="login-container">
       <% if user_signed_in? %>
-        <p class="greeting">Hi, <%= current_user.name %></p>
+        <p class="greeting">Hi there, <%= current_user.name %></p>
         <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
       <% else %>
         <%= link_to "Login", new_user_session_path, class: "login-button" %>
@@ -24,6 +25,9 @@
     </div>
   </header>
 
+
   <%= yield %>
+<%= render 'shared/footer' %>
+
 </body>
 </html>
