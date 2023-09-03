@@ -3,7 +3,7 @@
   <h1><%= @user.name %>'s items</h1>
   <hr>
 
-  <div class="card-group mt-3">
+  <div class="card-group mt-3" style="margin-bottom: 100px;">
     <% @user.items.each_slice(4) do |items_slice| %>
       <div class="row">
         <% items_slice.each do |item| %>
