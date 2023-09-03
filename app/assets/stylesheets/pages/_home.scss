@@ -278,17 +278,3 @@ header {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
 }
-
-footer {
-  margin-top: auto;
-  background-color: transparent;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  right: 0;
-  border-top: 1px solid #ddd;
-  z-index: 999;
-}

@@ -9,8 +9,6 @@
 <div class="item-info">
   <p class="category" id="item-category">Category: <%= @item.category %></p>
 
-
-=======
 <h3><strong>Name: <%= @item.name %></strong></h3>
 <h4>Category: <%= @item.category %></h4>
 <% if @item.photos.first %>
@@ -21,18 +19,21 @@
 <h4>Description: <%= @item.description %></h4>
 <h4>Price: <%= @item.price %></h4>
 <h4>Seller: <%= @item.user.name %></h4>
-<hr>
 
-<% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
-  <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
-    <%= f.input :price %>
-    <%= f.submit "Edit Offer"%>
+<% if @item.status != "Sold" %>
+  <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
+    <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
+      <%= f.input :price %>
+      <%= f.submit "Edit Offer"%>
+    <% end %>
+  <% elsif @item.user != current_user %>
+    <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
+      <%= f.input :price %>
+      <%= f.submit "New Offer"%>
+    <% end %>
   <% end %>
-<% elsif @item.user != current_user %>
-  <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
-    <%= f.input :price %>
-    <%= f.submit "New Offer"%>
-  <% end %>
+<% else %>
+  <h1>Item has been sold!</h1>
 <% end %>
 
 <% if policy(@item).destroy? %>
@@ -41,7 +42,6 @@
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
   %>
 <% end %>
-<hr>
 <hr>
 
 <% if @item.user == current_user %>
