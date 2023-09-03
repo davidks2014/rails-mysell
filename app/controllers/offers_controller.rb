@@ -41,6 +41,9 @@ class OffersController < ApplicationController
     authorize @offer
     if @offer.update(offer_params)
       redirect_to @item, notice: "Offer was successfully updated."
+
+      @offer.update(status: "pending") # update the status of the offer to pending in case the previous offer was declined
+
     else
       render :edit, status: :unprocessable_entity
     end
