@@ -14,7 +14,7 @@
   <%#= render "shared/navbar" %>
   <%= render "shared/homepagebutton" %>
   <%= render "shared/flashes" %>
-  <header class="header-container">
+  <header class="header-container" style="margin-top: 40px;"> <!-- Adjust the margin-top value as needed -->
     <div class="login-container">
       <% if user_signed_in? %>
         <p class="greeting">Hi there, <%= current_user.name %></p>
@@ -25,9 +25,8 @@
     </div>
   </header>
 
-
   <%= yield %>
-  <footer style="background-color: #272222; color: white; text-align: center; padding: 1rem 0.1rem 0.1rem;">
+  <footer style="color: white; text-align: center; padding: 1rem 0.1rem 0.1rem;">
     &copy; 2023 mySell - the team that is going to bring you, StockPro</p>
   </footer>
 
