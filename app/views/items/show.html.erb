@@ -17,7 +17,7 @@
   <% end %>
 <% end %>
 <h4>Description: <%= @item.description %></h4>
-<h4>Price: <%= @item.price %></h4>
+<h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
 <h4>Seller: <%= @item.user.name %></h4>
 
 <% if @item.status != "Sold" %>
@@ -47,7 +47,7 @@
 <% if @item.user == current_user %>
   <h1>Offers you have received for this item</h1>
   <% @offers.each do |offer| %>
-      <p>Offered price: <%= offer.price %></p>
+      <p>Offered price: $<%= offer.formatted_price %></p>
       <p>Offered by: <%= offer.user.name %></p>
       <p>Item status: <%= @item.status %></p>
       <p>Offer id: <%= offer.id %></p>
@@ -69,7 +69,7 @@
     <h1>Offers you have made for this item</h1>
     <% @offers.each do |offer| %>
       <% if offer.user == current_user  %>
-        <p>Price you offered: <%= offer.price %></p>
+        <p>Price you offered: $<%= offer.formatted_price %></p>
         <p>Item status : <%= @item.status %></p>
         <p>Offer status : <%= offer.status %></p>
       <% end %>
