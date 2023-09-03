@@ -1,5 +1,6 @@
+<<<<<<< HEAD
 <br>
-<h1>All Pending Offers </h1> <br>
+<% if @user == current_user %>
     <table border="1">
         <tr>
             <th>Item Name</th>
@@ -22,14 +23,14 @@
             <% end %>
         </div>
     </table>
+    <% else %>
+    <% redirect_to %>
+  <% end %>
 
-    <br>
-    <%= link_to "Back to my items", user_path(current_user), style: "color: white;" %>
-<% @offers.each do |offer| %>
-  <p>Item name : <%= offer.item.name %></p>
-  <p>Seller name : <%= offer.item.user.name %></p>
-  <p>Offer price : <%= offer.price %></p>
-  <p>Offered by : <%= offer.user.name %></p>
-  <p>Status : <%= offer.status %></p>
-  <hr>
-<% end %>
+
+
+  <br>
+  <%= link_to "Back to home page", user_path(current_user), style: "color: white;" %>
+=======
+<h1>Testing</h1>
+>>>>>>> master
