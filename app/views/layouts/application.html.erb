@@ -7,12 +7,25 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+  <link rel="stylesheet" href="path/to/font-awesome/css/fontawesome.css">
+
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 <body>
+
   <%#= render "shared/navbar" %>
-  <%= render "shared/homepagebutton" %>
+  <%#= render "shared/homepagebutton" %>
+  <div class="d-flex">
+  <div>
+      <%= render "shared/homepagebutton" %>
+  </div>
+  <div class="logo-container">
+    <%= image_tag("mySell_vertical.png", alt: "mySell", id: "logo-image;") %>
+  </div>
+
+</div>
+
   <%= render "shared/flashes" %>
   <header class="header-container" style="margin-top: 40px;"> <!-- Adjust the margin-top value as needed -->
     <div class="login-container">
