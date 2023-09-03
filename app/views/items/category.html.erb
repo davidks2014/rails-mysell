@@ -3,7 +3,7 @@
   <div class="card-group mt-3">
     <% @items.each do |item| %>
       <div class="card" style="width: 18rem;">
-        <div>
+        <div class="image-container d-flex justify-content-center align-items-center">
           <% if item.photos.first %>
             <%= cl_image_tag item.photos.first.key, height: 150, width: 100, crop: :fill %>
           <% end %>

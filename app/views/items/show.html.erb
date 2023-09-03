@@ -69,7 +69,7 @@
     <h1>Offers you have made for this item</h1>
     <% @offers.each do |offer| %>
       <% if offer.user == current_user  %>
-        <p>Price you offered: $<%= offer.formatted_price %></p>
+        <p>Price you offered: $<%= number_with_precision(@item.price, precision: 2) %</p>
         <p>Item status : <%= @item.status %></p>
         <p>Offer status : <%= offer.status %></p>
       <% end %>

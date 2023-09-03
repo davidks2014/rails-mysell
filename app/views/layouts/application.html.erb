@@ -30,10 +30,12 @@
   <header class="header-container" style="margin-top: 40px;"> <!-- Adjust the margin-top value as needed -->
     <div class="login-container">
       <% if user_signed_in? %>
-        <p class="greeting">Hi there, <%= current_user.name %></p>
-        <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+        <p class="greeting">Hi there, <strong> <%= current_user.name %> </strong></p>
+        <%# link_to "Log out", destroy_user_session_path, class: "btn dropdown-item", data: {turbo_method: :delete} %>
+        <%= link_to "Log out", destroy_user_session_path, class: "btn logout-button", data: {turbo_method: :delete} %>
       <% else %>
-        <%= link_to "Login", new_user_session_path, class: "login-button" %>
+        <%= link_to "Login", new_user_session_path, class: "btn login-button" %>
+        <%# link_to "Login", new_user_session_path, class: "btn btn-primary" %>
       <% end %>
     </div>
   </header>
