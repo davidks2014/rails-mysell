@@ -1,26 +1,44 @@
-<h1> This page will show all offers </h1>
+<h1> My Offers </h1>
+<br>
 
-<% @offers.each do |offer| %>
-  <% if @user == offer.user %>
-    <%= "this is buyer" %>
-    <p>Item name : <%= offer.item.name %></p>
-    <p>Seller name : <%= offer.item.user.name %></p>
-    <p>Offer price : <%= offer.price %></p>
-    <p>Offered by : <%= offer.user.name %></p>
-    <p>Status : <%= offer.status %></p>
-    <hr>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="offers_made-tab-pane" aria-selected="true">Offers made</button>
+  </li>
 
-  <% elsif @user == offer.item.user %>
-    <%= "this is seller" %>
-    <p>Item name : <%= offer.item.name %></p>
-    <p>Seller name : <%= offer.item.user.name %></p>
-    <p>Offer price : <%= offer.price %></p>
-    <p>Offered by : <%= offer.user.name %></p>
-    <p>Status : <%= offer.status %></p>
-      <% if @user == offer.item.user && offer.status == "pending" %>
-        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-        <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="offers_received-tab-pane" aria-selected="false">Offers received </button>
+  </li>
+
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="offers_made-tab" tabindex="0">
+    <% @offers.each do |offer| %>
+      <% if @user == offer.user %>
+        <p>Item name : <%= offer.item.name %></p>
+        <p>Seller name : <%= offer.item.user.name %></p>
+        <p>Offer price : <%= offer.price %></p>
+        <p>Status : <%= offer.status %></p>
+        <hr>
       <% end %>
-    <hr>
-  <% end %>
-<% end %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="offers_received-tab" tabindex="0">
+    <% @offers.each do |offer| %>
+      <% if @user == offer.item.user %>
+        <p>Item name : <%= offer.item.name %></p>
+        <p>Offer price : <%= offer.price %></p>
+        <p>Offered by : <%= offer.user.name %></p>
+        <p>Status : <%= offer.status %></p>
+          <% if @user == offer.item.user && offer.status == "pending" %>
+            <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+            <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+          <% end %>
+      <hr>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

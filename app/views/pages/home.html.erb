@@ -1,4 +1,3 @@
-
   <div id="video-background">
     <video autoplay muted loop playsinline controls="false">
       <source src="https://drive.google.com/uc?export=download&id=1EEAuAgCZNrG5giu9WLSJB-FmRLaY75IZ" type="video/mp4">
@@ -95,8 +94,9 @@
         <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
       </div>
 
-       <div class="btn btn-primary" style="background-color: #FFFFFF; color: #000000;">
-        <%= link_to "See All Offers", offers_path(current_user) %>
+       <div class="btn custom-button custom-button-see-offers">
+       <i class="fa-solid fa-bolt" style="color: #E88585;"></i>
+        <%= link_to "See All Offers", offers_path(current_user), style: "color: white;" %>
       </div>
     <% end %>
   </div>
