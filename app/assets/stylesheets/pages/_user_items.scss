@@ -1,3 +1,4 @@
+/* CSS */
 .container {
   display: flex;
   justify-content: center;
@@ -8,15 +9,17 @@
 h1 {
   text-align: center;
 }
+
 .card-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Each row will have a maximum of 4 items */
   gap: 1rem;
+  justify-items: center;
 }
 
 .card {
-  width: 18rem;
+  /* Adjust the width to control the spacing between cards */
+  width: calc(25% - 1rem); /* 25% width for each card with 1rem gap between them */
 }
 
 .card-title {
@@ -27,6 +30,7 @@ h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
+
 .btn-primary {
   background-color: #85ADE8;
   color: black;
