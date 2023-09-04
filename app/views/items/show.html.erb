@@ -1,200 +1,102 @@
-<%# <div class="item-offer-container"> %>
-  <%# <div class=""> %>
-    <%# <div class=""> %>
-      <%# <div class=""> %>
-        <%# <h5 class="">Special title treatment</h5> %>
-        <%# <p class="">With supporting text below as a natural lead-in to additional content.</p> %>
-        <%# <a href="#" class="btn btn-primary">Go somewhere</a> %>
-      <%# </div> %>
-    <%# </div> %>
-  <%# </div> %>
-  <%# <div class=""> %>
-    <%# <div class=""> %>
-      <%# <div class=""> %>
-        <%# <h5 class="">Special title treatment</h5> %>
-        <%# <p class="">With supporting text below as a natural lead-in to additional content.</p> %>
-        <%# <a href="#" class="btn btn-primary">Go somewhere</a> %>
-      <%# </div> %>
-    <%# </div> %>
-  <%# </div> %>
-<%# </div> %>
-<%#  %>
-<%#  %>
-<%#  %>
-<%# <div class="d-flex"> %>
-  <%# <div class=item-container> %>
-    <%# <h4>this is a test</h4> %>
-  <%# </div> %>
-  <%# <div class=item-container > %>
-    <%# <h4>this is another test</h4> %>
-  <%# </div> %>
-<%# </div> %>
-<%#  %>
-
-<%# <div class="item-offers-container"> %>
-  <%# <div class="item-info-container"> %>
-    <%# <h2>This is a test page</h2> %>
-    <%# <p>testing testing...</p> %>
-  <%# </div> %>
-  <%# <div class="item-info-container"> %>
-    <%# <h2>This is another test</h2> %>
-    <%# <p>hello there...</p> %>
-  <%# </div> %>
-<%# </div> %>
-
 
 <div>
-  <div class="row" style="margin-top: 50px;justify-content: center;">
+  <div class="row" style="margin-top: 50px; justify-content: center;">
     <div class="col-5" style="background: gray; height: 100vh; padding: 2rem;">
 
-    <h5>Category: <%= @item.category %></h5>
-    <% if @item.photos.first %>
-      <% @item.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-      <% end %>
-    <% end %>
-
-    <h4><strong>Name: <%= @item.name %></strong></h4>
-
-    <h4>Description: <%= @item.description %></h4>
-    <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
-    <h4>Seller: <%= @item.user.name %></h4>
-
-    <hr>
-
-    <% if @item.status != "sold" %>
-      <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
-        <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
-          <%= f.input :price %>
-          <%= f.submit "Edit Offer"%>
+      <h5>Category: <%= @item.category %></h5>
+      <% if @item.photos.first %>
+        <% @item.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
         <% end %>
-      <% elsif @item.user != current_user %>
-        <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
-          <%= f.input :price %>
-          <%= f.submit "New Offer"%>
+      <% end %>
+
+      <h4><strong>Name: <%= @item.name %></strong></h4>
+      <h4>Description: <%= @item.description %></h4>
+      <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
+      <h4>Seller: <%= @item.user.name %></h4>
+
+      <hr>
+
+      <% if @item.status != "sold" %>
+        <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
+          <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
+            <%= f.input :price %>
+            <%= f.submit "Edit Offer"%>
+          <% end %>
+        <% elsif @item.user != current_user %>
+          <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
+            <%= f.input :price %>
+            <%= f.submit "New Offer"%>
+          <% end %>
+        <% end %>
+      <% else %>
+        <h1>Item has been sold!</h1>
+      <% end %>
+
+      <% if policy(@item).destroy? %>
+        <%= link_to "Remove this item",
+          item_path(@item), class: "btn btn-primary", method: :delete,
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        %>
+      <% end %>
+      <hr>
+
+    </div>
+
+    <div class="col-7" style="background: gray; height: 100vh; padding: 2rem;">
+      <div style="height: 100%; padding-right: 10px; overflow-y: scroll">
+
+    <% if @item.user == current_user %>
+      <h1>Offers you have received for this item</h1>
+
+        <% if @item.status == "available" && @offer.status != "Offer declined" %>
+
+          <table class="table table-striped">
+            <tr>
+                <th>List Price</th>
+                <th>Offered Price</th>
+                <th>Offered By</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <div class="grid-container">
+              <% @offers.each do |offer| %>
+                <tr>
+                    <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
+                    <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
+                    <td><%= offer.user.name %></td>
+                    <td><%= offer.status %></td>
+                    <td>
+                      <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+                      <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
+                    </td>
+
+                </tr>
+              <% end %>
+            </div>
+          </table>
+        <% end %>
+
+        <hr>
+
+
+
+    <% elsif @offers.any? { |offer| offer.user == current_user } %>
+      <h1>Offers you have made for this item</h1>
+
+      <% @offers.each do |offer| %>
+        <% if offer.user == current_user  %>
+          <p>Price you offered: $<%= number_with_precision(@item.price, precision: 2) %></p>
+          <p>Item status : <%= @item.status %></p>
+          <p>Offer status : <%= offer.status %></p>
         <% end %>
       <% end %>
     <% else %>
-      <h1>Item has been sold!</h1>
+      <h1>You have not made any offer for this item</h1>
     <% end %>
 
-    <% if policy(@item).destroy? %>
-      <%= link_to "Remove this item",
-        item_path(@item), class: "btn btn-primary", method: :delete,
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-      %>
-    <% end %>
-    <hr>
+  <br>
 
-      <p>
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-      </p>
-    </div>
+  <%= link_to "Back to my items", user_path(current_user), class: "btn btn-primary center-btn" %>
 
-
-    <div class="col-5" style="background: gray; height: 100vh; padding: 2rem;">
-      <div style="height: 100%; padding-right: 10px; overflow-y: scroll">
-<%#  %>
-        <%# <table class="table"> %>
-          <%# <thead> %>
-          <%# <tr> %>
-            <%# <th scope="col">#</th> %>
-            <%# <th scope="col">First</th> %>
-            <%# <th scope="col">Last</th> %>
-            <%# <th scope="col">Action</th> %>
-          <%# </tr> %>
-          <%# </thead> %>
-          <%# <tbody> %>
-          <%# <% @articles.each do |article| %>
-            <%# <tr> %>
-              <%# <th scope="row">1</th> %>
-              <%# <td><%= article.id %></td>
-              <%# <td>Otto</td> %>
-              <%# <td> %>
-                <%# <%= link_to "Delete", article_path(article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
-                <%# <%= link_to "Delete", article_path(article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
-<%#  %>
-              <%# </td> %>
-              <%# <td> %>
-              <%# </td> %>
-            <%# </tr> %>
-          <%# <% end %>
-<%#  %>
-          <%# <tr> %>
-            <%# <th scope="row">2</th> %>
-            <%# <td>Jacob</td> %>
-            <%# <td>Thornton</td> %>
-            <%# <td>@fat</td> %>
-          <%# </tr> %>
-          <%# <tr> %>
-            <%# <th scope="row">3</th> %>
-            <%# <td colspan="2">Larry the Bird</td> %>
-            <%# <td>@twitter</td> %>
-          <%# </tr> %>
-          <%# </tbody> %>
-        <%# </table> %>
-<%#  %>
-
-
-
-<% if @item.user == current_user %>
-  <h1>Offers you have received for this item</h1>
-
-    <% if @item.status == "available" && @offer.status != "Offer declined" %>
-
-      <table class="table table-striped">
-          <tr>
-              <th>List Price</th>
-              <th>Offered Price</th>
-              <th>Offered By</th>
-              <th>Status</th>
-              <th>Action</th>
-          </tr>
-          <div class="grid-container">
-              <% @offers.each do |offer| %>
-                  <tr>
-                      <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
-                      <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
-                      <td><%= offer.user.name %></td>
-                      <td><%= offer.status %></td>
-                      <td>
-                        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-                        <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
-                      </td>
-
-                  </tr>
-              <% end %>
-          </div>
-      </table>
-    <% end %>
-
-  <% end %>
-
-<br>
-
-<%#  %>
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-<%#  %>
-        <%# The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. %>
-<%#  %>
-        <%# Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. %>
-<%#  %>
-        <%# The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. %>
-<%#  %>
-        <%# <br> %>
-        <%# Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. %>
-<%#  %>
-        <%# The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. %>
-<%#  %>
-<%#  %>
-<%#  %>
-        <%# The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. %>
-<%#  %>
-        <%# <br> %>
-<%#  %>
-<%#  %>
-      <%# </div> %>
-    <%# </div> %>
-  <%# </div> %>
-<%# </div> %>
-<%#  %>
+</div>
