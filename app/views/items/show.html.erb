@@ -140,29 +140,33 @@
 <% if @item.user == current_user %>
   <h1>Offers you have received for this item</h1>
 
-    <table class="table table-striped">
-        <tr>
-            <th>List Price</th>
-            <th>Offered Price</th>
-            <th>Offered By</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        <div class="grid-container">
-            <% @offers.each do |offer| %>
-                <tr>
-                    <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
-                    <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
-                    <td><%= offer.user.name %></td>
-                    <td><%= offer.status %></td>
+    <% if @item.status == "available" && @offer.status != "Offer declined" %>
 
-                </tr>
-            <% end %>
-        </div>
-    </table>
+      <table class="table table-striped">
+          <tr>
+              <th>List Price</th>
+              <th>Offered Price</th>
+              <th>Offered By</th>
+              <th>Status</th>
+              <th>Action</th>
+          </tr>
+          <div class="grid-container">
+              <% @offers.each do |offer| %>
+                  <tr>
+                      <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
+                      <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
+                      <td><%= offer.user.name %></td>
+                      <td><%= offer.status %></td>
+                      <td>
+                        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+                        <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
+                      </td>
 
-
-
+                  </tr>
+              <% end %>
+          </div>
+      </table>
+    <% end %>
 
   <% end %>
 
