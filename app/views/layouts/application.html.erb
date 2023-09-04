@@ -12,36 +12,45 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
+
 <body>
 
   <%#= render "shared/navbar" %>
   <%#= render "shared/homepagebutton" %>
   <div class="d-flex">
-  <div>
-      <%= render "shared/homepagebutton" %>
+    <div>
+        <%= render "shared/homepagebutton" %>
+    </div>
+    <div class="logo-container">
+      <%= image_tag("mySell_vertical.png", alt: "mySell", id: "logo-image;") %>
+    </div>
   </div>
-  <div class="logo-container">
-    <%= image_tag("mySell_vertical.png", alt: "mySell", id: "logo-image;") %>
-  </div>
-
-</div>
 
   <%= render "shared/flashes" %>
-  <header class="header-container" style="margin-top: 40px;"> <!-- Adjust the margin-top value as needed -->
+  <header class="header-container" style="margin-top: 40px;">
+    <div class="logo-container">
+      <%= image_tag("mySell_vertical.png", alt: "mySell") %>
+    </div>
     <div class="login-container">
       <% if user_signed_in? %>
-        <p class="greeting">Hi there, <%= current_user.name %></p>
+        <p class="greeting">
+          Hi there, <%= current_user.name %> <i class="fas fa-face-smile"></i>
+        </p>
         <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
       <% else %>
         <%= link_to "Login", new_user_session_path, class: "login-button" %>
       <% end %>
     </div>
   </header>
+  </body>
+
 
   <%= yield %>
-  <footer style="color: white; text-align: center; padding: 1rem 0.1rem 0.1rem;">
-    &copy; 2023 mySell - the team that is going to bring you, StockPro</p>
+
+  <footer style="background-color: #333; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem;">
+    &copy; 2023 mySell - the team that is going to bring you, StockPro
   </footer>
 
 </body>
+
 </html>
