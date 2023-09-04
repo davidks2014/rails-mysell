@@ -17,8 +17,7 @@
             <%= cl_image_tag item.photos.first.key, height: 200, width: 200, crop: :fill %>
           <% else %>
             <!-- Default image if no photo available -->
-            <%= cl_image_tag("defaultitemimage_pzyb2w",
-      width: 200, height: 200, crop: :fill) %>
+            <%= cl_image_tag("defaultitemimage_pzyb2w", width: 200, height: 200, crop: :fill) %>
           <% end %>
         </div>
         <div class="card-body">
@@ -40,6 +39,6 @@
 
 <br>
 
-<%= link_to "View offers for all my items", user_path(current_user), style: "color: white;" %>
+<%= link_to "View offers for all my items", offers_path, style: "color: white;" %>
 <br>
 <%= link_to "List a New Item", new_item_path, style: "color: white;" %>

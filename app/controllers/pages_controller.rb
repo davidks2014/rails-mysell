@@ -12,12 +12,11 @@ class PagesController < ApplicationController
   end
 
   def approve
-    # raise
     @offer = Offer.find(params[:offer_id])
     @item = @offer.item
     # Add logic to approve the offer
-    if @offer.update(status: 'Offer acepted')
-      @item.update(status: 'Sold')
+    if @offer.update(status: 'Offer accepted')
+      @item.update(status: 'sold')
     end
     redirect_to item_path(@item), notice: "Offer approved successfully"
   end
