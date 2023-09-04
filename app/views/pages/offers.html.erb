@@ -2,47 +2,120 @@
 <br>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
+
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="offers_made-tab-pane" aria-selected="true">Offers made</button>
+    <button class="nav-link active" id="offer1-tab" data-bs-toggle="tab" data-bs-target="#offer1-tab-pane" type="button" role="tab" aria-controls="offer1-tab-pane" aria-selected="true">Offers made (accepted)</button>
   </li>
 
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="offers_received-tab-pane" aria-selected="false">Offers received </button>
+    <button class="nav-link" id="offer2-tab" data-bs-toggle="tab" data-bs-target="#offer2-tab-pane" type="button" role="tab" aria-controls="offer2-tab-pane" aria-selected="false">Offers made (pending)</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="offer5-tab" data-bs-toggle="tab" data-bs-target="#offer5-tab-pane" type="button" role="tab" aria-controls="offer5-tab-pane" aria-selected="false">Offers made (declined)</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="offer3-tab" data-bs-toggle="tab" data-bs-target="#offer3-tab-pane" type="button" role="tab" aria-controls="offer3-tab-pane" aria-selected="false">Offers received (accepted)</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="offer4-tab" data-bs-toggle="tab" data-bs-target="#offer4-tab-pane" type="button" role="tab" aria-controls="offer4-tab-pane" aria-selected="false">Offers received (pending)</button>
   </li>
 
 </ul>
 
+
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="offers_made-tab" tabindex="0">
-    <% @offers.each do |offer| %>
-      <% if @user == offer.user %>
-        <p>Item name : <%= offer.item.name %></p>
-        <p>Seller name : <%= offer.item.user.name %></p>
-        <p>Item Price : $<%= number_with_precision(offer.item.price, precision: 2) %></p>
-        <%# <p>Offer price : $<%= offer.price %></p>
-        <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
-        <p>Status : <%= offer.status %></p>
-        <hr>
+
+  <div class="tab-pane fade show active"  id="offer1-tab-pane" role="tabpanel" aria-labelledby="offer1-tab" tabindex="0">
+    <div class="card-group mt-3">
+      <% @offers.each do |offer| %>
+        <% if @user == offer.user && offer.status == "Offer accepted" %>
+          <div class="card-ntg">
+            <p>Item name : <%= offer.item.name %></p>
+            <p>Seller name : <%= offer.item.user.name %></p>
+            <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
+            <p>Offer status : <%= offer.status %></p>
+            <%= link_to "See details", item_path(offer.item), style: "color: white;" %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
-  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="offers_received-tab" tabindex="0">
-    <% @offers.each do |offer| %>
-      <% if @user == offer.item.user %>
-        <p>Item name : <%= offer.item.name %></p>
-        <%# <p>Offer price : <%= offer.price %></p>
-        <p>Item Price : $<%= number_with_precision(offer.item.price, precision: 2) %></p>
-        <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
-        <p>Offered by : <%= offer.user.name %></p>
-        <p>Status : <%= offer.status %></p>
-          <% if @user == offer.item.user && offer.status == "pending" %>
-            <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-            <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-          <% end %>
-      <hr>
+  <div class="tab-pane fade" id="offer2-tab-pane" role="tabpanel" aria-labelledby="offer2-tab" tabindex="0">
+    <div class="card-group mt-3">
+      <% @offers.each do |offer| %>
+        <% if @user == offer.user && offer.status == "pending" %>
+          <div class="card-ntg">
+            <p>Item name : <%= offer.item.name %></p>
+            <p>Seller name : <%= offer.item.user.name %></p>
+            <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
+            <p>Offer status : <%= offer.status %></p>
+            <%= link_to "See details", item_path(offer.item), style: "color: white;" %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="offer5-tab-pane" role="tabpanel" aria-labelledby="offer5-tab" tabindex="0">
+    <div class="card-group mt-5">
+      <% @offers.each do |offer| %>
+        <% if @user == offer.user && offer.status == "Offer declined" %>
+          <div class="card-ntg">
+            <p>Item name : <%= offer.item.name %></p>
+            <p>Seller name : <%= offer.item.user.name %></p>
+            <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
+            <p>Offer status : <%= offer.status %></p>
+            <%= link_to "See details", item_path(offer.item), style: "color: white;" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="offer3-tab-pane" role="tabpanel" aria-labelledby="offer3-tab" tabindex="0">
+    <div class="card-group mt-3">
+      <% @offers.each do |offer| %>
+        <% if @user == offer.item.user && offer.status == "Offer accepted" %>
+          <div class="card-ntg">
+            <p>Item name : <%= offer.item.name %></p>
+            <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
+            <p>Offered by : <%= offer.user.name %></p>
+            <p>Offer status : <%= offer.status %></p>
+            <%= link_to "See details", item_path(offer.item) %>
+            <br>
+            <% if @user == offer.item.user && offer.status == "pending" %>
+              <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+              <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="offer4-tab-pane" role="tabpanel" aria-labelledby="offer4-tab" tabindex="0">
+    <div class="card-group mt-3">
+      <% @offers.each do |offer| %>
+        <% if @user == offer.item.user && offer.status == "pending" %>
+          <div class="card-ntg">
+            <p>Item name : <%= offer.item.name %></p>
+            <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
+            <p>Offered by : <%= offer.user.name %></p>
+            <p>Offer status : <%= offer.status %></p>
+            <%= link_to "See details", item_path(offer.item) %>
+            <br>
+            <% if @user == offer.item.user && offer.status == "pending" %>
+              <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+              <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
 </div>

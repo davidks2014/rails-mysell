@@ -8,16 +8,6 @@
 h1 {
   text-align: center;
 }
-.card-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.card {
-  width: 18rem;
-}
 
 .card-title {
   font-size: 1.5rem;
@@ -27,6 +17,7 @@ h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
+
 .btn-primary {
   background-color: #85ADE8;
   color: black;
