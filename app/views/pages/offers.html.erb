@@ -18,7 +18,9 @@
       <% if @user == offer.user %>
         <p>Item name : <%= offer.item.name %></p>
         <p>Seller name : <%= offer.item.user.name %></p>
-        <p>Offer price : <%= offer.price %></p>
+        <p>Item Price : $<%= number_with_precision(offer.item.price, precision: 2) %></p>
+        <%# <p>Offer price : $<%= offer.price %></p>
+        <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
         <p>Status : <%= offer.status %></p>
         <hr>
       <% end %>
@@ -29,7 +31,9 @@
     <% @offers.each do |offer| %>
       <% if @user == offer.item.user %>
         <p>Item name : <%= offer.item.name %></p>
-        <p>Offer price : <%= offer.price %></p>
+        <%# <p>Offer price : <%= offer.price %></p>
+        <p>Item Price : $<%= number_with_precision(offer.item.price, precision: 2) %></p>
+        <p>Offer price : $<%= number_with_precision(offer.price, precision: 2) %></p>
         <p>Offered by : <%= offer.user.name %></p>
         <p>Status : <%= offer.status %></p>
           <% if @user == offer.item.user && offer.status == "pending" %>
