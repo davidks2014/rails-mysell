@@ -20,6 +20,7 @@
         <p>Seller name : <%= offer.item.user.name %></p>
         <p>Offer price : <%= offer.price %></p>
         <p>Status : <%= offer.status %></p>
+        <%= link_to "See details", item_path(offer.item), style: "color: white;" %>
         <hr>
       <% end %>
     <% end %>
@@ -32,10 +33,12 @@
         <p>Offer price : <%= offer.price %></p>
         <p>Offered by : <%= offer.user.name %></p>
         <p>Status : <%= offer.status %></p>
-          <% if @user == offer.item.user && offer.status == "pending" %>
-            <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-            <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-          <% end %>
+        <%= link_to "See details", item_path(offer.item), style: "color: white;" %>
+        <br>
+        <% if @user == offer.item.user && offer.status == "pending" %>
+          <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+          <%= link_to "Decline", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+        <% end %>
       <hr>
       <% end %>
     <% end %>
