@@ -1,0 +1,105 @@
+
+<%= stylesheet_link_tag 'pages/_indiv_item_user', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="item-name-wrapper">
+  <h3><strong class="item-name" id="item-name"><%= @item.name.capitalize %></strong></h3>
+</div>
+
+<div class="item-info">
+<h4><strong>Name: <%= @item.name %></strong></h4>
+<h3>Category: <%= @item.category %></h3>
+<% if @item.photos.first %>
+  <% @item.photos.each do |photo| %>
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+<% end %>
+<h4>Description: <%= @item.description %></h4>
+<h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
+<h4>Seller: <%= @item.user.name %></h4>
+
+<% if @item.status != "sold" %>
+  <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
+    <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
+      <%= f.input :price %>
+      <%= f.submit "Edit Offer"%>
+    <% end %>
+  <% elsif @item.user != current_user %>
+    <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
+      <%= f.input :price %>
+      <%= f.submit "New Offer"%>
+    <% end %>
+  <% end %>
+<% else %>
+  <h1>Item has been sold!</h1>
+<% end %>
+
+<% if policy(@item).destroy? %>
+  <%= link_to "Remove this item",
+    item_path(@item), class: "btn btn-primary", method: :delete,
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<% end %>
+<hr>
+
+<% if @item.user == current_user %>
+  <h1>Offers you have received for this item</h1>
+
+    <table class="table table-striped">
+        <tr>
+            <th>List Price</th>
+            <th>Offered Price</th>
+            <th>Offered By</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <div class="grid-container">
+            <% @offers.each do |offer| %>
+                <tr>
+                    <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
+                    <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
+                    <td><%= offer.user.name %></td>
+                    <td><%= offer.status %></td>
+
+                </tr>
+            <% end %>
+        </div>
+    </table>
+
+
+
+  <% @offers.each do |offer| %>
+      <p>Offered price: $<%= number_with_precision(offer.price, precision: 2) %></p>
+
+      <p>Offered by: <%= offer.user.name %></p>
+      <p>Offer status: <%= @item.status %></p>
+      <p>Offer id: <%= offer.id %></p>
+      <p>Offer status: <%= offer.status %></p>
+
+        <%# <div class="button-container"> %>
+        <%# link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-primary" %>
+        <%# link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-danger" %>
+
+      <% if @item.status == "available" && offer.status != "Offer declined" %>
+        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+        <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
+      <% end %>
+
+      <hr>
+  <% end %>
+
+<% elsif @offers.any? { |offer| offer.user == current_user }  %>
+    <h1>Offers you have made for this item</h1>
+    <% @offers.each do |offer| %>
+      <% if offer.user == current_user  %>
+        <p>Price you offered: $<%= number_with_precision(@item.price, precision: 2) %></p>
+        <p>Item status : <%= @item.status %></p>
+        <p>Offer status : <%= offer.status %></p>
+      <% end %>
+    <% end %>
+  <% else %>
+    <h1>You have not made any offer for this item</h1>
+<% end %>
+
+<br>
+
+<%= link_to "Back to my items", user_path(current_user), class: "btn btn-primary center-btn" %>

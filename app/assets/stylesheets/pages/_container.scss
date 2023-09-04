@@ -1,16 +1,18 @@
-// .item-offer-container {
-  // display: d-flex;
-  // width: 1000px;
-  // height: 400px;
-  // background-color: gray;
-  // margin: 0 auto;
-// }
+.item-offers-container {
+  display: flex;
+  border: 1px;
+  margin: 0 auto;
+}
 
-// .item-info {
-  // background-color: white;
-  // width: 1000px;
-  // height: 800px;
-// }
+.item-info-container {
+  background-color: lightgrey;
+  justify-content: center !important;
+  align-items: center;
+  margin: 20px;
+  padding: 50px;
+  width: 600px;
+  height: 100vh;
+}
 //
 // item-container {
   // background-color: lightgray;
