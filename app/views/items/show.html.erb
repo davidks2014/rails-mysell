@@ -46,11 +46,26 @@
 <% if @item.user == current_user %>
   <h1>Offers you have received for this item</h1>
   <% @offers.each do |offer| %>
-      <p>Offered price: <%= offer.price %></p>
-      <p>Offered by: <%= offer.user.name %></p>
-      <p>Item status: <%= @item.status %></p>
-      <p>Offer id: <%= offer.id %></p>
-      <p>Offer status: <%= offer.status %></p>
+    <table class="table table-striped">
+        <tr>
+            <th>List Price</th>
+            <th>Offered Price</th>
+            <th>Offered By</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <div class="grid-container">
+            <% @offers.each do |offer| %>
+                <tr>
+                    <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
+                    <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
+                    <td><%= offer.user.name %></td>
+                    <td><%= offer.status %></td>
+
+                </tr>
+            <% end %>
+        </div>
+    </table>
 
         <%# <div class="button-container"> %>
         <%# link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-primary" %>
