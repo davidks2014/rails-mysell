@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <!--<%= render "shared/navbar" %> -->
+  <!--<%= render "shared/navbar" -->
   <%= render "shared/homepagebutton" %>
   <%= render "shared/flashes" %>
   <header class="header-container" style="margin-top: 40px;">
@@ -21,7 +21,9 @@
     </div>
     <div class="login-container">
       <% if user_signed_in? %>
-        <p class="greeting">Hi there, <%= current_user.name %></p>
+        <p class="greeting">
+          Hi there, <%= current_user.name %> <i class="fas fa-face-smile"></i>
+        </p>
         <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
       <% else %>
         <%= link_to "Login", new_user_session_path, class: "login-button" %>
@@ -31,7 +33,7 @@
 
   <%= yield %>
 
-  <footer style="color: white; text-align: center; padding: 1rem 0.1rem 0.1rem;">
+  <footer style="background-color: #333; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem;">
     &copy; 2023 mySell - the team that is going to bring you, StockPro
   </footer>
 </body>
