@@ -10,3 +10,7 @@ class Item < ApplicationRecord
   has_many_attached :photos
   has_many :offers, dependent: :destroy
 end
+
+def formatted_price
+  format('%.2f', price)
+end

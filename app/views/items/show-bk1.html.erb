@@ -1,6 +1,7 @@
 
 <%= stylesheet_link_tag 'pages/_indiv_item_user', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+
 <div class="item-name-wrapper">
   <h3><strong class="item-name" id="item-name"><%= @item.name.capitalize %></strong></h3>
 </div>
@@ -17,7 +18,7 @@
 <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
 <h4>Seller: <%= @item.user.name %></h4>
 
-<% if @item.status != "sold" %>
+<% if @item.status != "Sold" %>
   <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
     <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
       <%= f.input :price %>
@@ -35,7 +36,7 @@
 
 <% if policy(@item).destroy? %>
   <%= link_to "Remove this item",
-    item_path(@item), class: "btn btn-primary", method: :delete,
+    item_path(@item), method: :delete,
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
   %>
 <% end %>
@@ -43,30 +44,6 @@
 
 <% if @item.user == current_user %>
   <h1>Offers you have received for this item</h1>
-
-    <table class="table table-striped">
-        <tr>
-            <th>List Price</th>
-            <th>Offered Price</th>
-            <th>Offered By</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        <div class="grid-container">
-            <% @offers.each do |offer| %>
-                <tr>
-                    <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
-                    <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
-                    <td><%= offer.user.name %></td>
-                    <td><%= offer.status %></td>
-
-                </tr>
-            <% end %>
-        </div>
-    </table>
-
-
-
   <% @offers.each do |offer| %>
       <p>Offered price: $<%= number_with_precision(offer.price, precision: 2) %></p>
 
@@ -101,5 +78,37 @@
 <% end %>
 
 <br>
+<%= link_to "Back to my items", user_path(current_user), style: "color: white;" %>
 
-<%= link_to "Back to my items", user_path(current_user), class: "btn btn-primary center-btn" %>
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="d-flex">
+  <div>
+   <h3>1st section</h3>
+  </div>
+  <div>
+    <h3>2nd section</h3>
+  </div>
+</div>
