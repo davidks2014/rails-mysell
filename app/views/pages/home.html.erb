@@ -19,7 +19,7 @@
     <section class="featured-products">
       <div class="featured-content slider">
         <h2>&#128293; Featured Items &#128293;</h2>
-        <% @featured_items.first(3).each do |item| %>
+        <% @featured_items.first(6).each do |item| %>
           <a href="/items/<%= item.id %>" class="product">
             <h3><%= item.name %></h3>
             <p><%= item.description %></p>
