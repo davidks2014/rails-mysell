@@ -3,11 +3,29 @@
 
     <div class="col-5" style="background: gray; height: 100vh; padding: 2rem;">
       <h4>Category: <%= @item.category %></h4>
-      <% if @item.photos.first %>
-        <% @item.photos.each do |photo| %>
-          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+
+      <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <% if @item.photos.first %>
+          <% @item.photos.each do |photo| %>
+            <div class="carousel-item active">
+              <%= cl_image_tag photo.key, class: "d-block w-1 my-4 rounded" %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
       <h4 style="margin-top: 20px;"><strong>Name: <%= @item.name %></strong></h4>
       <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
       <h4>Description: <%= @item.description %></h4>
