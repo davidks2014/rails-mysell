@@ -10,7 +10,7 @@
         <% end %>
       <% end %>
 
-      <h4><strong>Name: <%= @item.name %></strong></h4>
+      <h4 style="margin-top: 20px;"><strong>Name: <%= @item.name %></strong></h4>
       <h4>Description: <%= @item.description %></h4>
       <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
       <h4>Seller: <%= @item.user.name %></h4>
@@ -49,7 +49,8 @@
     <% if @item.user == current_user %>
       <h1>Offers you have received for this item</h1>
 
-        <% if @item.status == "available" && @offer.status != "Offer declined" %>
+      <% @offers.each do |offer| %>
+        <% if @item.status == "available" && offer.status != "Offer declined" %>
 
           <table class="table table-striped">
             <tr>
@@ -76,9 +77,9 @@
             </div>
           </table>
         <% end %>
+      <% end %>
 
         <hr>
-
 
 
     <% elsif @offers.any? { |offer| offer.user == current_user } %>
