@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>This page is for search item</h1>
+  <h1>Search your items</h1>
   <div>
     <%#= form_tag(items_path, method: "get") do %>
     <%#= text_field_tag(:search, params[:search], placeholder: "Search items") %>
@@ -8,20 +8,25 @@
 
     <%= simple_form_for :search, method: "get", url: items_path do |f| %>
       <%= f.input :query, label: false, placeholder: "Type Something" %>
-      <%= f.submit "Search" %>
+      <%= f.submit "Search", class: "item-center" %>
     <% end %>
   </div>
 
+<div class="container text-center">
   <div class="card-group mt-3">
     <% @items.each do |item| %>
       <% if item.user != current_user %>
-        <div class="card" style="width: 18rem;">
+        <div class="card custom-card" style="width: 18rem;">
         <%= link_to item_path(item) do %>
-          <img src="..." class="card-img-top" alt="...">
+            <% if item.photos.first %>
+              <%= cl_image_tag item.photos.first.key, height: 200, width: 200, crop: :fill %>
+            <% else %>
+              <!-- Default image if no photo available -->
+              <%= cl_image_tag("defaultitemimage_pzyb2w", width: 200, height: 200, crop: :fill) %>
+            <% end %>
           <div class="card-body">
             <h5 class="card-title"><strong><%= item.name %></strong></h5>
-            <p class="card-text"><%= item.description %>Item descriptions.</p>
-              <%= link_to "Offer", item_path(item), class: "btn btn-primary"%>
+            <%= link_to "Offer", item_path(item), class: "btn btn-primary"%>
             <% end %>
           </div>
         </div>
