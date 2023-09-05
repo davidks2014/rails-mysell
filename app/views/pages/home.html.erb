@@ -27,7 +27,6 @@
                 <%= cl_image_tag("defaultitemimage_pzyb2w", width: 150, height: 150, crop: :fill) %>
              <% end %>
             <h3><%= item.name %></h3>
-            <p><%= item.description %></p>
             <span class="price"><%= number_to_currency(item.price, precision: 2) %></span>
           </a>
         <% end %>
