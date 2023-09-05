@@ -1,6 +1,3 @@
-
-<%= stylesheet_link_tag 'pages/_indiv_item_user', media: 'all', 'data-turbolinks-track': 'reload' %>
-
 <div class="item-name-wrapper">
   <h3><strong class="item-name" id="item-name"><%= @item.name.capitalize %></strong></h3>
 </div>
@@ -19,6 +16,7 @@
 <h4>Price: <%= @item.price %></h4>
 <h4>Seller: <%= @item.user.name %></h4>
 
+<%# BUYER %>
 <% if @item.status != "sold" %>
   <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
     <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
@@ -35,51 +33,8 @@
   <h1>Item has been sold!</h1>
 <% end %>
 
-<% if policy(@item).destroy? %>
-  <%= link_to "Remove this item",
-    item_path(@item), method: :delete,
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %>
-<% end %>
-<hr>
-
-<% if @item.user == current_user %>
-  <h1>Offers you have received for this item</h1>
-  <% @offers.each do |offer| %>
-    <table class="table table-striped">
-        <tr>
-            <th>List Price</th>
-            <th>Offered Price</th>
-            <th>Offered By</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        <div class="grid-container">
-            <% @offers.each do |offer| %>
-                <tr>
-                    <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
-                    <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
-                    <td><%= offer.user.name %></td>
-                    <td><%= offer.status %></td>
-
-                </tr>
-            <% end %>
-        </div>
-    </table>
-
-        <%# <div class="button-container"> %>
-        <%# link_to "Accept Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-primary" %>
-        <%# link_to "Decline Offer", edit_item_offer_path(@item, offer), method: :patch, class: "btn btn-danger" %>
-
-      <% if @item.status == "available" && offer.status != "Offer declined" %>
-        <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
-        <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
-      <% end %>
-
-      <hr>
-  <% end %>
-
-<% elsif @offers.any? { |offer| offer.user == current_user }  %>
+<%# BUYER %>
+<% if @item.user != current_user && @offers.any? { |offer| offer.user == current_user }  %>
     <h1>Offers you have made for this item</h1>
     <% @offers.each do |offer| %>
       <% if offer.user == current_user  %>
@@ -88,8 +43,48 @@
         <p>Offer status : <%= offer.status %></p>
       <% end %>
     <% end %>
-  <% else %>
-    <h1>You have not made any offer for this item</h1>
+  <% elsif @item.user != current_user %>
+    <h3>You have not made any offer for this item</h3>
+<% end %>
+
+<% if policy(@item).destroy? %>
+  <%= link_to "Remove this item",
+    item_path(@item), method: :delete,
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<% end %>
+<hr>
+
+<%# SELLER %>
+<% if @item.user == current_user %>
+  <h3>Offers you have received for this item</h3>
+
+  <table class="table table-striped">
+      <tr>
+          <th>List Price</th>
+          <th>Offered Price</th>
+          <th>Offered By</th>
+          <th>Status</th>
+          <th>Action</th>
+      </tr>
+
+      <div class="grid-container">
+          <% @offers.each do |offer| %>
+              <tr>
+                  <td>$<%= number_with_precision(offer.item.price, precision: 2) %></td>
+                  <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
+                  <td><%= offer.user.name %></td>
+                  <td><%= offer.status %></td>
+                  <td>
+                    <% if @item.status == "available" && offer.status != "Offer declined" %>
+                      <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post} %>
+                      <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post} %>
+                    <% end %>
+                  </td>
+              </tr>
+          <% end %>
+      </div>
+  </table>
 <% end %>
 
 <br>
