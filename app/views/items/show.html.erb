@@ -17,7 +17,7 @@
         <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
           <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
             <%= f.input :price %>
-            <%= f.submit "Edit Offer"%>
+            <%= f.submit "Edit Offer", placeholder: "Enter your price" %>
           <% end %>
         <% elsif @item.user != current_user %>
           <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
@@ -40,31 +40,16 @@
     <div class="col-7" style="background: gray; height: 100vh; padding: 2rem;">
       <div style="height: 100%; padding-right: 10px; overflow-y: scroll">
 
-        <%# BUYER %>
-        <% if @item.status != "sold" %>
-          <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
-            <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
-              <%= f.input :price %>
-              <%= f.submit "Edit Offer"%>
-            <% end %>
-          <% elsif @item.user != current_user %>
-            <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
-              <%= f.input :price %>
-              <%= f.submit "New Offer"%>
-            <% end %>
-          <% end %>
-        <% else %>
-          <h1>Item has been sold!</h1>
-        <% end %>
+
 
         <%# BUYER %>
         <% if @item.user != current_user && @offers.any? { |offer| offer.user == current_user }  %>
             <h1>Offers you have made for this item</h1>
             <% @offers.each do |offer| %>
               <% if offer.user == current_user  %>
-                <p>Price you offered: <%= offer.price %></p>
-                <p>Item status : <%= @item.status %></p>
-                <p>Offer status : <%= offer.status %></p>
+                <h3>Price you offered: $<%= number_with_precision(offer.price, precision: 2) %></h3>
+                <h3>Item status : <%= @item.status %></h3>
+                <h3>Offer status : <%= offer.status %></h3>
               <% end %>
             <% end %>
           <% elsif @item.user != current_user %>
@@ -72,7 +57,7 @@
         <% end %>
 
 
-        
+
 
         <%# SELLER %>
         <% if @item.user == current_user %>
