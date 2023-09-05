@@ -207,7 +207,7 @@ header {
   border-radius: 15px;
   color: white;
   text-decoration: none;
-  height: 150px;
+  height: 250px;
   width: 300px; /* change accordingly for the width of the cards */
 }
 
@@ -283,4 +283,12 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+.product h3 {
+  margin-bottom: 0px;
 }
