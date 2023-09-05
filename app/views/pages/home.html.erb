@@ -19,36 +19,19 @@
     <section class="featured-products">
       <div class="featured-content slider">
         <h2>&#128293; Featured Items &#128293;</h2>
-        <% @featured_items.first(3).each do |item| %>
+        <% @featured_items.first(6).each do |item| %>
           <a href="/items/<%= item.id %>" class="product">
+             <% if item.photos.first %>
+                <%= cl_image_tag item.photos.first.key, height: 150, width: 150, crop: :fill %>
+              <% else %>
+                <%= cl_image_tag("defaultitemimage_pzyb2w", width: 150, height: 150, crop: :fill) %>
+             <% end %>
             <h3><%= item.name %></h3>
             <p><%= item.description %></p>
             <span class="price"><%= number_to_currency(item.price, precision: 2) %></span>
           </a>
         <% end %>
       </div>
-    </section>
-  </div>
-
-  <div class="sold-items">
-    <section class="sold-content slider">
-      <h2>&#128176; Recently Sold Items &#128176;</h2>
-      <div class="product">
-        <h3>Yaya's brain space</h3>
-        <p>Heavily used for coding</p>
-        <span class="price">$999999.99</span>
-      </div>
-      <div class="product">
-        <h4>Toydoll Box Set</h4>
-        <p>Bought for my daughter but she likes playing with cars and trucks instead</p>
-        <span class="price">$20.00</span>
-      </div>
-      <div class="product">
-        <h5>iPhone 14 Pro Max Deep Purple 256GB</h5>
-        <p>Used, no scratches, battery at 99%</p>
-        <span class="price">$1200.39</span>
-      </div>
-      <!-- add more if you have more items -->
     </section>
   </div>
 
