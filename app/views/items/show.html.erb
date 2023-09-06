@@ -1,119 +1,113 @@
+<div class="col-10">
+  <div class="row" style="margin-top: 50px; justify-content: center;">
 
+    <div class="col-5" style="background: gray; height: 100vh; padding: 2rem;">
+      <h4>Category: <%= @item.category %></h4>
 
-
-  <div class="row" style="margin-top: 50px; justify-content: center; >
-
-      <div class="col-5" style="background: gray; height: 100vh; padding: 2rem;">
-        <h4>Category: <%= @item.category %></h4>
-
-        <div id="carouselExample" class="carousel slide"  style = "width = 100%;">
-          <div class="carousel-inner">
-            <% if @item.photos.first %>
-              <% @item.photos.each do |photo| %>
-                <div class="carousel-item active">
-                  <%= cl_image_tag photo.key, class: "d-block w-100 carousel-image" %>
-                </div>
-              <% end %>
+      <div id="carouselExample" class="carousel slide"  style = "width = 80%;">
+        <div class="carousel-inner">
+          <% if @item.photos.first %>
+            <% @item.photos.each do |photo| %>
+              <div class="carousel-item active">
+                <%= cl_image_tag photo.key, class: "d-block w-100 carousel-image" %>
+              </div>
             <% end %>
-          </div>
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          <% end %>
         </div>
 
-        <h4 style="margin-top: 20px;"><strong>Name: <%= @item.name %></strong></h4>
-        <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
-        <h4>Description: <%= @item.description %></h4>
-        <h4>Seller: <%= @item.user.name %></h4>
-        <hr>
-        <% if @item.status != "sold" %>
-          <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
-            <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
-              <%= f.input :price %>
-              <%= f.submit "Edit Offer", placeholder: "Enter your price" %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <h4 style="margin-top: 20px;"><strong>Name: <%= @item.name %></strong></h4>
+      <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
+      <h4>Description: <%= @item.description %></h4>
+      <h4>Seller: <%= @item.user.name %></h4>
+      <hr>
+      <% if @item.status != "sold" %>
+        <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
+          <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
+            <%= f.input :price %>
+            <%= f.submit "Edit Offer", placeholder: "Enter your price" %>
+          <% end %>
+        <% elsif @item.user != current_user %>
+          <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
+            <%= f.input :price %>
+            <%= f.submit "New Offer"%>
+          <% end %>
+        <% end %>
+      <% else %>
+        <h1>Item has been sold!</h1>
+      <% end %>
+
+      <% if policy(@item).destroy? %>
+        <%= link_to "Remove this item",
+          item_path(@item), class: "btn btn-primary", method: :delete,
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        %>
+      <% end %>
+      <hr>
+    </div>
+
+    <div class="col-7" style="background: gray; height: 100vh; padding: 2rem;">
+      <div style="height: 100%; padding-right: 10px; overflow-y: scroll">
+
+        <%# BUYER %>
+        <% if @item.user != current_user && @offers.any? { |offer| offer.user == current_user }  %>
+            <h1>Offers you have made for this item</h1>
+            <% @offers.each do |offer| %>
+              <% if offer.user == current_user  %>
+                <h3>Price you offered: $<%= number_with_precision(offer.price, precision: 2) %></h3>
+                <h3>Item status : <%= @item.status %></h3>
+                <h3>Offer status : <%= offer.status %></h3>
+              <% end %>
             <% end %>
           <% elsif @item.user != current_user %>
-            <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
-              <%= f.input :price %>
-              <%= f.submit "New Offer"%>
-            <% end %>
-          <% end %>
-        <% else %>
-          <h1>Item has been sold!</h1>
+            <h3>You have not made any offer for this item</h3>
         <% end %>
 
-        <% if policy(@item).destroy? %>
-          <%= link_to "Remove this item",
-            item_path(@item), class: "btn btn-primary", method: :delete,
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          %>
+        <%# SELLER %>
+        <% if @item.user == current_user %>
+          <h2>Offers you have received for this item</h2>
+
+          <table class="table table-striped">
+              <tr>
+                  <th>Offered Price</th>
+                  <th>Offered By</th>
+                  <th>Status</th>
+                  <th>Action</th>
+              </tr>
+
+              <div class="grid-container">
+                  <% @offers.each do |offer| %>
+                      <tr>
+                          <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
+                          <td><%= offer.user.name %></td>
+                          <td><%= offer.status %></td>
+                          <td>
+                            <% if @item.status == "available" && offer.status != "Offer declined" %>
+                              <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+                              <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+                            <% end %>
+                          </td>
+                      </tr>
+                  <% end %>
+              </div>
+          </table>
         <% end %>
-        <hr>
+
       </div>
-
-      <div class="col-7" style="background: gray; height: 100vh; padding: 2rem;">
-        <div style="height: 100%; padding-right: 10px; overflow-y: scroll">
-
-          <%# BUYER %>
-          <% if @item.user != current_user && @offers.any? { |offer| offer.user == current_user }  %>
-              <h1>Offers you have made for this item</h1>
-              <% @offers.each do |offer| %>
-                <% if offer.user == current_user  %>
-                  <h3>Price you offered: $<%= number_with_precision(offer.price, precision: 2) %></h3>
-                  <h3>Item status : <%= @item.status %></h3>
-                  <h3>Offer status : <%= offer.status %></h3>
-                <% end %>
-              <% end %>
-            <% elsif @item.user != current_user %>
-              <h3>You have not made any offer for this item</h3>
-          <% end %>
-
-          <%# SELLER %>
-          <% if @item.user == current_user %>
-            <h2>Offers you have received for this item</h2>
-
-            <table class="table table-striped">
-                <tr>
-                    <th>Offered Price</th>
-                    <th>Offered By</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-
-                <div class="grid-container">
-                    <% @offers.each do |offer| %>
-                        <tr>
-                            <td>$<%= number_with_precision(offer.price, precision: 2) %></td>
-                            <td><%= offer.user.name %></td>
-                            <td><%= offer.status %></td>
-                            <td>
-                              <% if @item.status == "available" && offer.status != "Offer declined" %>
-                                <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-                                <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
-                              <% end %>
-                            </td>
-                        </tr>
-                    <% end %>
-                </div>
-            </table>
-          <% end %>
-
-        </div>
-      </div>
+    </div>
 
   </div>
+</div>
 
-
-  <div style="position: absolute; top: 0%; z-index: 2; btn custom-button custom-button-see-items;">
-    <i class="fas fa-eye" style="color: #E88585;"></i>
-    <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
-  </div>
-
-
+<br>
+<%= link_to "Back to my items", user_path(current_user), style: "color: white;" %>
