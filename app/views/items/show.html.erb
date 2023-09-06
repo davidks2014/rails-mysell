@@ -29,8 +29,9 @@
       </div>
 
       <h4 style="margin-top: 20px;"><strong>Name: <%= @item.name %></strong></h4>
-      <h4>Price: $<%= number_with_precision(@item.price, precision: 2) %></h4>
+      <h4>Price: <%=  number_to_currency(@item.price, precision: 2) %></h4>
       <h4>Description: <%= @item.description %></h4>
+      <h4>Item status: <%= @item.status %></h4>
       <h4>Seller: <%= @item.user.name %></h4>
 
       <% if @item.status != "sold" %>
@@ -45,8 +46,6 @@
             <%= f.submit "New Offer"%>
           <% end %>
         <% end %>
-      <% else %>
-        <h1>Item has been sold!</h1>
       <% end %>
 
       <% if policy(@item).destroy? %>
@@ -79,13 +78,20 @@
       <div style="height: 100%; padding-right: 10px; overflow-y: scroll">
 
         <%# BUYER %>
+      <% if @item.status == "sold" %>
+        <h1>Item has been sold!</h1>
+      <% end %>
+
+      <br>
         <% if @item.user != current_user && @offers.any? { |offer| offer.user == current_user }  %>
             <h1>Offers you have made for this item</h1>
+            <br>
             <% @offers.each do |offer| %>
               <% if offer.user == current_user  %>
-                <h3>Price you offered: $<%= number_with_precision(offer.price, precision: 2) %></h3>
-                <h3>Item status : <%= @item.status %></h3>
-                <h3>Offer status : <%= offer.status %></h3>
+                <hr>
+                <h2 style = "font-weight:bold; color:black; text-shadow: 2px 2px 3px white; text-align: center;" >Price you offered: <%= number_to_currency(offer.price, precision: 2) %></h3>
+                <h2 style = "font-weight:bold; color:black; text-shadow: 2px 2px 3px white; text-align: center;">Offer status : <%= offer.status %></h3>
+                <hr>
               <% end %>
             <% end %>
           <% elsif @item.user != current_user %>
