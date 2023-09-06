@@ -89,13 +89,13 @@
             <% @offers.each do |offer| %>
               <% if offer.user == current_user  %>
                 <hr>
-                <h2 style = "font-weight:bold; color:black; text-shadow: 2px 2px 3px white; text-align: center;" >Price you offered: <%= number_to_currency(offer.price, precision: 2) %></h3>
-                <h2 style = "font-weight:bold; color:black; text-shadow: 2px 2px 3px white; text-align: center;">Offer status : <%= offer.status %></h3>
+                <h2 style = "font-weight:bold; color:black; text-shadow: 2px 2px 3px white; text-align: center;" >Price you offered: <%= number_to_currency(offer.price, precision: 2) %></h2>
+                <h2 style = "font-weight:bold; color:black; text-shadow: 2px 2px 3px white; text-align: center;">Offer status : <%= offer.status %></h2>
                 <hr>
               <% end %>
             <% end %>
           <% elsif @item.user != current_user %>
-            <h3>You have not made any offer for this item</h3>
+            <h1>You have not made any offer for this item</h1>
         <% end %>
 
         <%# SELLER %>
