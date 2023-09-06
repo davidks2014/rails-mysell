@@ -4,7 +4,7 @@
     <div class="col-5" style="background: gray; height: 100vh; padding: 2rem;">
       <h4>Category: <%= @item.category %></h4>
 
-      <div id="carouselExample" class="carousel slide">
+      <div id="carouselExample" class="carousel slide"  style = "width = 80%;">
         <div class="carousel-inner">
           <% if @item.photos.first %>
             <% @item.photos.each do |photo| %>
