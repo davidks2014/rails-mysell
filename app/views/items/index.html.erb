@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Search your items</h1>
+  <h1>Search for items</h1>
   <div>
     <%#= form_tag(items_path, method: "get") do %>
     <%#= text_field_tag(:search, params[:search], placeholder: "Search items") %>
@@ -33,4 +33,23 @@
       <% end %>
     <% end %>
   </div>
+</div>
+
+<div class="btn-group">
+
+  <div class="btn custom-button custom-button-new-item">
+    <i class="fas fa-plus" style="color: #E88585;"></i>
+    <%= link_to "List a New Item", new_item_path, style: "color: white;" %>
+  </div>
+
+  <div class="btn custom-button custom-button-see-items">
+    <i class="fas fa-eye" style="color: #E88585;"></i>
+    <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
+  </div>
+
+  <div class="btn custom-button custom-button-see-offers">
+    <i class="fa-solid fa-bolt" style="color: #E88585;"></i>
+    <%= link_to "See All Offers", offers_path(current_user), style: "color: white;" %>
+  </div>
+
 </div>
