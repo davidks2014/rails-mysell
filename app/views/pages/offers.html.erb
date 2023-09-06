@@ -124,11 +124,10 @@
     <i class="fas fa-plus" style="color: #E88585;"></i>
     <%= link_to "List a New Item", new_item_path, style: "color: white;" %>
   </div>
-  <% if @user %>
-    <div class="btn custom-button custom-button-see-items">
-      <i class="fas fa-eye" style="color: #E88585;"></i>
-      <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
-    </div>
 
-  <% end %>
+
+  <div class="btn custom-button custom-button-see-items">
+    <i class="fas fa-eye" style="color: #E88585;"></i>
+    <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
+  </div>
 </div>
