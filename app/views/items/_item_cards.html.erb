@@ -1,0 +1,18 @@
+ <% items.each do |item| %>
+      <% if item.user != current_user %>
+        <div class="card custom-card" style="width: 18rem;">
+        <%= link_to item_path(item) do %>
+            <% if item.photos.first %>
+              <%= cl_image_tag item.photos.first.key, height: 200, width: 200, crop: :fill %>
+            <% else %>
+              <!-- Default image if no photo available -->
+              <%= cl_image_tag("defaultitemimage_pzyb2w", width: 200, height: 200, crop: :fill) %>
+            <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><strong><%= item.name %></strong></h5>
+            <%= link_to "Offer", item_path(item), class: "btn btn-primary"%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>

@@ -6,6 +6,13 @@ class ItemsController < ApplicationController
       query = params[:search][:query].downcase
       @items = Item.where("LOWER(name) LIKE ?", "%#{query}%")
     end
+    puts "test tete"
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: { cardsHtml: render_to_string(partial: "item_cards", locals: {items: @items}, formats: [:html])}
+      end
+    end
   end
 
   # def formatted_price
@@ -18,13 +25,9 @@ class ItemsController < ApplicationController
     @offers = @item.offers
 
     @offer = @offers.find { |offer| offer.user == current_user }
-    authorize @item
 
-    accepted_offer = @offers.find_by(status: "Offer accepted")
-    if accepted_offer
-      @offers.where.not(id: accepted_offer.id).update_all(status: "Offer closed")
-      accepted_offer.item.update(status: "sold")
-    end
+
+    authorize @item
   end
 
   def new

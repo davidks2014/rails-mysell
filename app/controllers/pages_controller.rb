@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     # Add logic to approve the offer
     if @offer.update(status: 'Offer accepted')
       @item.update(status: 'sold')
+      @item.offers.where.not(id:  @offer.id).update_all(status: "Offer closed")
     end
     redirect_to item_path(@item), notice: "Offer approved successfully"
   end

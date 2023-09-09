@@ -119,7 +119,7 @@
                           <td>
                             <% if @item.status == "available" && offer.status != "Offer declined" %>
                               <%= link_to "Accept", offer_approve_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-                              <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+                             <%= link_to "Decline", offer_decline_path(offer), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
                             <% end %>
                           </td>
                       </tr>
