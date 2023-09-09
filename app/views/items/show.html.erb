@@ -36,9 +36,9 @@
 
       <% if @item.status != "sold" %>
         <% if @item.user != current_user && @item.offers.exists?(user: current_user)%>
-          <%= simple_form_for [@item, @offer], html: { class: "offer-form" } do |f| %>
+          <%= simple_form_for [@item, @offer], html: { class: "offer-form", data: {controller: "hello"} } do |f| %>
             <%= f.input :price %>
-            <%= f.submit "Edit Offer", placeholder: "Enter your price" %>
+            <%= f.submit "Edit Offer", placeholder: "Enter your price",  data: {"hello-target": "messages"}%>
           <% end %>
         <% elsif @item.user != current_user %>
           <%= simple_form_for [@item, Offer.new], html: { class: "offer-form" } do |f| %>
