@@ -1,0 +1,7 @@
+<h1>this is offers edit pages</h1>
+
+<%= simple_form_for [@item, @offer] do |f| %>
+  <%= f.input :price %>
+  <%= f.input :status, collection: ["Offer accepted", "Offer declined"] %>
+  <%= f.submit "Confirm"%>
+<% end %>

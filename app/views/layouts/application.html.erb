@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>RailsMysell</title>
+  <title>mySell</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+  <link rel="stylesheet" href="path/to/font-awesome/css/fontawesome.css">
+
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
+
 <body>
+
   <%#= render "shared/navbar" %>
-  <%= render "shared/flashes" %>
-  <header class="header-container">
+  <%#= render "shared/homepagebutton" %>
+  <div class="d-flex">
+    <div>
+        <%= render "shared/homepagebutton" %>
+    </div>
+    <div class="logo-container">
+      <%= image_tag("mySell_vertical.png", alt: "mySell", id: "logo-image;", style: "margin-top: 50px;") %>
+    </div>
+  </div>
+
     <div class="login-container">
       <% if user_signed_in? %>
-        <p class="greeting">Hi, <%= current_user.name %></p>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "login-button" %>
+        <p class="greeting">Hi there, <strong> <%= current_user.name %> </strong></p>
+        <%# link_to "Log out", destroy_user_session_path, class: "btn dropdown-item", data: {turbo_method: :delete} %>
+        <%= link_to "Log out", destroy_user_session_path, class: "btn logout-button", data: {turbo_method: :delete} %>
       <% else %>
-        <%= link_to "Login", new_user_session_path, class: "login-button" %>
+        <%= link_to "Login", new_user_session_path, class: "btn login-button" %>
+        <%# link_to "Login", new_user_session_path, class: "btn btn-primary" %>
       <% end %>
     </div>
   </header>
+  </body>
+
 
   <%= yield %>
+
+  <footer style="background-color: #333; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem;">
+    &copy; 2023 mySell - the team that is going to bring you, StockPro
+  </footer>
+
 </body>
+
 </html>

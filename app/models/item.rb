@@ -6,6 +6,11 @@ class Item < ApplicationRecord
   validates :category, presence: true
   validates :name, presence: true
   scope :random_featured, -> (limit) { where(status: "Available").where(category: CATEGORIES.sample).order("RANDOM()").limit(limit) }
-  validates :photos, presence: true
+  # validates :photos, presence: true
   has_many_attached :photos
+  has_many :offers, dependent: :destroy
+end
+
+def formatted_price
+  format('%.2f', price)
 end

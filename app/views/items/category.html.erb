@@ -3,20 +3,46 @@
   <div class="card-group mt-3">
     <% @items.each do |item| %>
       <div class="card" style="width: 18rem;">
-        <div>
-          <%= cl_image_tag item.photos.first.key, height: 150, width: 100, crop: :fill %>
+        <div class="image-container d-flex justify-content-center align-items-center">
+          <% if item.photos.first %>
+            <%= cl_image_tag item.photos.first.key, height: 200, width: 200, crop: :fill %>
+          <% else %>
+            <!-- Default image if no photo available -->
+            <%= cl_image_tag("defaultitemimage_pzyb2w", width: 200, height: 200, crop: :fill) %>
+          <% end %>
         </div>
         <div class="card-body">
           <h3 class="card-title"><strong><%= item.name %></strong></h3>
-          <h3>Price: <%= item.price %></h3>
+          <h3>Price: $<%= number_with_precision(item.price, precision: 2) %></h3>
           <%= link_to "See Details", item_path(item), class: "btn btn-primary" %>
           <%= link_to "Seller: #{item.user.name}", user_path(item.user) %>
-          <%= link_to "Remove this item",
-            item_path(item), method: :delete,
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          %>
+            <% if item.user == current_user %>
+              <%= link_to "Remove this item",
+                item_path(item), method: :delete,
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+             %>
+            <% end %>
         </div>
       </div>
     <% end %>
   </div>
+  <div class="btn-group">
+
+    <div class="btn custom-button custom-button-new-item">
+      <i class="fas fa-plus" style="color: #E88585;"></i>
+      <%= link_to "List a New Item", new_item_path, style: "color: white;" %>
+    </div>
+
+    <div class="btn custom-button custom-button-see-items">
+      <i class="fas fa-eye" style="color: #E88585;"></i>
+      <%= link_to "See My Items", user_path(current_user), style: "color: white;" %>
+    </div>
+
+    <div class="btn custom-button custom-button-see-offers">
+      <i class="fa-solid fa-bolt" style="color: #E88585;"></i>
+      <%= link_to "See All Offers", offers_path(current_user), style: "color: white;" %>
+    </div>
+
+</div>
+
 </div>
