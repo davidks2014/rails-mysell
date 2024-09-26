@@ -5,10 +5,17 @@
 }
 
 .card {
-  width: 18rem !important;
+  width: 14rem !important;
   border: 1px solid #ced4da !important; /* Add a border */
   border-radius: 10px !important; /* Apply rounded border */
   margin-bottom: 20px !important;
+}
+
+
+.card-ntg {
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 10px;
 }
 
 .card-body {

@@ -1,0 +1,32 @@
+<br>
+<% if @user == current_user %>
+    <table border="1">
+        <tr>
+            <th>Item Name</th>
+            <th>Seller Name</th>
+            <th>List Price</th>
+            <th>Offer Price</th>
+            <th>Offered By</th>
+            <th>Status</th>
+        </tr>
+        <div class="grid-container">
+            <% @offers.each do |offer| %>
+                <tr>
+                    <td><%= offer.item.name %></td>
+                    <td><%= offer.item.user.name %></td>
+                    <td><%= offer.item.price %></td>
+                    <td><%= offer.price %></td>
+                    <td><%= offer.user.name %></td>
+                    <td><%= offer.status %></td>
+                </tr>
+            <% end %>
+        </div>
+    </table>
+    <% else %>
+    <% redirect_to %>
+  <% end %>
+
+
+
+  <br>
+  <%= link_to "Back to home page", user_path(current_user), style: "color: white;" %>
